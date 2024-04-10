@@ -8,7 +8,7 @@ public class ConnectionManager {
 	/**
 	 * データベースURL
 	 */
-	private final static String URL = "jdbc:mysql://localhost:3306/itemdb?useSSL=false";
+	private final static String URL = "jdbc:mysql://localhost:3306/task_db";
 
 	/**
 	 * ユーザ
@@ -18,7 +18,7 @@ public class ConnectionManager {
 	/**
 	 * パスワード
 	 */
-	private final static String PASSWORD = "root";
+	private final static String PASSWORD = "mysql";
 
 	/**
 	 * データベースへの接続を取得して返します。

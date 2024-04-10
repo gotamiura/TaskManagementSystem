@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,11 +7,17 @@
 <title>メニュー画面</title>
 </head>
 <body>
-	<h1>メニュー画面</h1>
-	<hr>
-	<p>ようこそ！</p>
-	<input type = "submit" value = "タスク登録"><br><br>
-	<input type = "submit" value = "タスク一覧"><br><br>
-	<input type = "submit" value = "ログイン">
+	<form action="TaskRegisterServlet" method="post">
+		<h1>メニュー画面</h1>
+		<hr>
+		<%
+		String userName = (String) session.getAttribute("UserName");
+		%>
+		<b>ようこそ！<%=userName%>さん
+		</b><br> <input type="submit" value="タスク登録"><br>
+		<br>
+	</form>
+	<a href="TaskListServlet"><input type="submit" value="タスク一覧"><br>
+	<br> <a href="logout.jsp"> <input type="submit" value="ログアウト"></a>
 </body>
 </html>
