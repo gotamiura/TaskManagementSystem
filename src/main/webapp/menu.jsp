@@ -7,7 +7,7 @@
 <title>メニュー画面</title>
 </head>
 <body>
-	<form action="TaskRegisterServlet" method="post">
+	<form action="TaskRegisterServlet" method="get">
 		<h1>メニュー画面</h1>
 		<hr>
 		<%
