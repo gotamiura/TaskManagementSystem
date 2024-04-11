@@ -25,17 +25,23 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String url = null;
-		String userId = request.getParameter("userid");
-		String password = request.getParameter("password");
+		// DAOの生成
 		UserDAO userDao = new UserDAO();
+		// セッションオブジェクトを生成
+		HttpSession session = request.getSession();
+		// 入力されたユーザIDとパスワードを取得する
+		String userId = request.getParameter("userId");
+		String password = request.getParameter("password");
 		try {
+			//ユーザは入力されたユーザIDとパスワードを確認する
 			if (userDao.validate(userId, password)) {
-				url = "menu.jsp";
+				url = "menu.jsp";//メニュー画面
+				//ユーザは入力されたユーザIDとパスワードからユーザ名を取得する
 				String userName = userDao.userName(userId, password);
-				HttpSession session = request.getSession();
+				// セッションスコープへの属性の設定
 				session.setAttribute("UserName", userName);
 			} else {
-				url = "login-failure.jsp";
+				url = "login-failure.jsp";//ログイン失敗画面
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();

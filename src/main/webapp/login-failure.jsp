@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ログイン失敗画面</title>
 </head>
 <body>
 	<form action="login.jsp" method="post">
@@ -15,6 +15,6 @@
 			<input type="submit" value="ログイン画面へ">
 		</div>
 	</form>
-	
+
 </body>
 </html>

@@ -10,19 +10,18 @@
 	<form action="LoginServlet" method="post">
 		<h1>ログイン画面</h1>
 		<hr>
-		<hr>
 		<h3>ユーザIDとパスワードを入力してください。</h3>
 		<table>
 			<tr>
 				<th>ユーザID</th>
-				<td><input type="text" name="userName"></td>
+				<td><input type="text" name="userId"></td>
 			</tr>
 			<tr>
 				<th>パスワード</th>
 				<td><input type="password" name="password"></td>
 			</tr>
 		</table>
-		<input type="submit" name="password">
+		<br> <input type="submit" value="ログイン">
 	</form>
 </body>
 </html>
