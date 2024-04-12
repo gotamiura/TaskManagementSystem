@@ -24,24 +24,43 @@ public class TaskListServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		List<TaskCategoryBean> taskList = null;
-		// DAOの生成
-		TaskCategoryDAO dao = new TaskCategoryDAO();
+//	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+//			throws ServletException, IOException {
+//		List<TaskCategoryBean> taskList = null;
+//		// DAOの生成
+//		TaskCategoryDAO dao = new TaskCategoryDAO();
+//
+//		try {
+//			// 商品マスタから商品情報を取得
+//			taskList = dao.selectAll();
+//		} catch (SQLException | ClassNotFoundException e) {
+//			e.printStackTrace();
+//		}
+//
+//		// リクエストスコープへの属性の設定
+//		request.setAttribute("taskList", taskList);
+//
+//		// 商品一覧画面への転送
+//		RequestDispatcher rd = request.getRequestDispatcher("task-list.jsp");
+//		rd.forward(request, response);
+//	}
+//}
 
-		try {
-			// 商品マスタから商品情報を取得
-			taskList = dao.selectAll();
-		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    List<TaskCategoryBean> taskList = null;
+	    TaskCategoryDAO dao = new TaskCategoryDAO();
 
-		// リクエストスコープへの属性の設定
-		request.setAttribute("taskList", taskList);
+	    try {
+	        taskList = dao.selectAll();
+	    } catch (SQLException | ClassNotFoundException e) {
+	        e.printStackTrace();
+	    }
 
-		// 商品一覧画面への転送
-		RequestDispatcher rd = request.getRequestDispatcher("task-list.jsp");
-		rd.forward(request, response);
+	    if (taskList != null) {
+	        request.setAttribute("taskList", taskList);
+	    }
+
+	    RequestDispatcher rd = request.getRequestDispatcher("task-list.jsp");
+	    rd.forward(request, response);
 	}
 }
