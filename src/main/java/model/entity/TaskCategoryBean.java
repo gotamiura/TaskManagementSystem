@@ -1,6 +1,6 @@
 package model.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * タスク一覧情報をサーブレットに送るためのBeanです。
@@ -9,8 +9,8 @@ import java.util.Date;
 public class TaskCategoryBean {
 	private String taskName;
 	private String categoryName;
-	private int categoryCode;
-	private Date limitDate;
+	private int categoryId;
+	private LocalDate limitDate;
 	private String userName;
 	private String userId;
 	private String statusName;
@@ -41,27 +41,27 @@ public class TaskCategoryBean {
 		this.categoryName = categoryName;
 	}
 	/**
-	 * @return categoryCode
+	 * @return categoryId
 	 */
-	public int getCategoryCode() {
-		return categoryCode;
+	public int getCategoryId() {
+		return categoryId;
 	}
 	/**
-	 * @param categoryCode セットする categoryCode
+	 * @param categoryId セットする categoryId
 	 */
-	public void setCategoryCode(int categoryCode) {
-		this.categoryCode = categoryCode;
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
 	}
 	/**
 	 * @return limitDate
 	 */
-	public Date getLimitDate() {
+	public LocalDate getLimitDate() {
 		return limitDate;
 	}
 	/**
 	 * @param limitDate セットする limitDate
 	 */
-	public void setLimitDate(Date limitDate) {
+	public void setLimitDate(LocalDate limitDate) {
 		this.limitDate = limitDate;
 	}
 	/**
@@ -125,5 +125,6 @@ public class TaskCategoryBean {
 		this.memo = memo;
 	}
 	
+
 
 }
