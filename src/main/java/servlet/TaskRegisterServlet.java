@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import model.dao.taskDAO;
 import model.entity.CategoryBean;
+import model.entity.TaskBean;
 
 /**
  * Servlet implementation class TaskRegisterServlet
@@ -41,6 +43,38 @@ public class TaskRegisterServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		
+		taskDAO dao = new taskDAO();
+		String taskName = request.getParameter("taskName");
+		String userName = request.getParameter("userName");
+		String memo = request.getParameter("memo");
+		
+		TaskBean taskBean = new TaskBean();
+		taskBean.setTask_name(taskName);
+		taskBean.setUser_id(userName);
+		taskBean.setMemo(memo);
+		
+		try {
+			
+			int categoryCode = Integer.parseInt(request.getParameter("categoryCode"));
+			LocalDate deadLine = LocalDate.parse(request.getParameter("deadLine"));
+			//char[] statusCode =request.getParameter("statusCode");
+			
+			taskBean.setCategory_id(categoryCode);
+			taskBean.setLimit_date(deadLine);
+			//taskBean.setStatus_code(statusCode);
+
+			int count = dao.insert(taskBean);
+			if (count != 0) {
+				RequestDispatcher rd = request.getRequestDispatcher("register-success.jsp");
+				rd.forward(request, response);
+			}
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			RequestDispatcher rd = request.getRequestDispatcher("register-failure.jsp");
+			rd.forward(request, response);
+		}
 		
 	}
 

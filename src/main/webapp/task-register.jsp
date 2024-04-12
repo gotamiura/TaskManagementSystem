@@ -18,7 +18,7 @@
 		</tr>
 		<tr>
 			<th>カテゴリ情報</th>
-			<td><select name= "categoryName">
+			<td><select name= "categoryCode">
 			<%for(CategoryBean categoryName : category){ %>
 				<option value = <%=categoryName.getCategory_id()%>><%=categoryName.getCategory_name()%></option>
 			<%} %>	
@@ -26,7 +26,7 @@
 		</tr>
 		<tr>
 			<th>期限</th>
-			<td><input type="date" name="deadline"></td>
+			<td><input type="date" name="deadLine"></td>
 		</tr>
 		<tr>
 			<th>担当者情報</th>
@@ -34,7 +34,7 @@
 		</tr>
 		<tr>
 			<th>ステータス情報</th>
-			<td><select name= "StatusCode">
+			<td><select name= "statusCode">
 				<option value=00>未着手</option>
 				<option value=50>着手</option>
 				<option value=99>完了</option>
