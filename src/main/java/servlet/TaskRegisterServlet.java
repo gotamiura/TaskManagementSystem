@@ -1,8 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -57,7 +57,7 @@ public class TaskRegisterServlet extends HttpServlet {
 		try {
 			
 			int categoryCode = Integer.parseInt(request.getParameter("categoryCode"));
-			LocalDate deadLine = LocalDate.parse(request.getParameter("deadLine"));
+			Date deadLine = Date.valueOf(request.getParameter("deadLine"));
 			//char[] statusCode =request.getParameter("statusCode");
 			
 			taskBean.setCategory_id(categoryCode);

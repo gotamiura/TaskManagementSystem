@@ -1,7 +1,6 @@
 package model.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -39,22 +38,21 @@ public class taskDAO {
 		
 		int count = 0;
 		try (Connection con = ConnectionManager.getConnection();
-				PreparedStatement pstmt = con.prepareStatement("INSERT INTO m_task(task_name,category_id, limit_date,user_id,memo) VALUES (?, ?, ?, ?, ?)")) {
-			ResultSet res = pstmt.executeQuery();
+				PreparedStatement pstmt = con.prepareStatement("INSERT INTO t_task(task_name,category_id, limit_date,user_id,status_code,memo) VALUES (?, ?, ?, ?, ?,?)")) {
 				
-				String task_name = res.getString("task_name");
+				/*String task_name = res.getString("task_name");
 				int category_id = res.getInt("category_id");
 				Date limit_date = res.getDate("limit_date");
 				String user_id = res.getString("user_id");
 				//Reader status_code = res.getCharacterStream("status_code");
-				String memo	= res.getString("memo");
+				String memo	= res.getString("memo");*/
 				
-				pstmt.setString(1, task_name);
-				pstmt.setInt(2, category_id);
-				pstmt.setDate(3, limit_date);
-				pstmt.setString(4, user_id);
-				//pstmt.setCharacterStream(5, status_code);
-				pstmt.setString(5, memo);
+				pstmt.setString(1,taskBean.getTask_name());
+				pstmt.setInt(2,taskBean.getCategory_id());
+				pstmt.setDate(3,taskBean.getLimit_date());
+				pstmt.setString(4,taskBean.getUser_id());
+				pstmt.setCharacterStream(5, "99");
+				pstmt.setString(5,taskBean.getMemo());
 				
 				count = pstmt.executeUpdate();
 		}
