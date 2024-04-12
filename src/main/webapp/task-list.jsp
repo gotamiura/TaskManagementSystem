@@ -34,7 +34,7 @@
                 href="task-alter-form.jsp?task_name=<%=task.getTaskName()%>"><%=task.getTaskName()%></a>
             </td>
             <td><%=task.getCategoryName()%></td>
-            <td><%=task.getLimitDate().format(formatter)%></td> <!-- limitDateをフォーマットして表示 -->
+            <td><%=task.getLimitDate()%></td> 
             <td><%=task.getUserName()%></td>
             <td><%=task.getStatusName()%></td>
             <td><%=task.getMemo()%></td>
