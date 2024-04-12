@@ -37,7 +37,7 @@ public class TaskCategoryDAO {
                 String categoryName = res.getString("category_name");
                 Date date = res.getDate("limit_date");
                 LocalDate limitDate = date.toLocalDate();
-                String userId = res.getString("user_id");
+                String userId = res.getString("user_name");
                 String statusName = res.getString("status_name");
                 String memo = res.getString("memo");
 
@@ -45,7 +45,7 @@ public class TaskCategoryDAO {
                 task.setTaskName(taskName);
                 task.setCategoryName(categoryName);
                 task.setLimitDate(limitDate);
-                task.setUserId(userId);
+                task.setUserName(userId);
                 task.setStatusName(statusName);
                 task.setMemo(memo);
 
