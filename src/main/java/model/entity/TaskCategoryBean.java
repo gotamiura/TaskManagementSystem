@@ -7,6 +7,7 @@ import java.time.LocalDate;
  * @author gotamiura
  */
 public class TaskCategoryBean {
+	private int taskId;
 	private String taskName;
 	private String categoryName;
 	private int categoryId;
@@ -16,6 +17,20 @@ public class TaskCategoryBean {
 	private String statusName;
 	private int statusCode;
 	private String memo;
+	
+	
+	/**
+	 * @return taskId
+	 */
+	public int getTaskId() {
+		return taskId;
+	}
+	/**
+	 * @param taskId セットする taskId
+	 */
+	public void setTaskId(int taskId) {
+		this.taskId = taskId;
+	}
 	/**
 	 * @return taskName
 	 */

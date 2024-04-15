@@ -2,6 +2,7 @@ package model.dao;
 
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,54 +17,84 @@ import model.entity.TaskCategoryBean;
  * @author goutamiura
  */
 public class TaskCategoryDAO {
-    
-    /**
-     * タスク一覧のリストを返します。
-     * @return タスク一覧のリスト
-     * @throws SQLException, ClassNotFoundException
-     */
-    public List<TaskCategoryBean> selectAll()
-            throws SQLException, ClassNotFoundException {
 
-        List<TaskCategoryBean> taskList = new ArrayList<TaskCategoryBean>();
+	/**
+	 * タスク一覧のリストを返します。
+	 * @return タスク一覧のリスト
+	 * @throws SQLException, ClassNotFoundException
+	 */
+	public List<TaskCategoryBean> selectAll()
+			throws SQLException, ClassNotFoundException {
 
-        try (Connection con = ConnectionManager.getConnection();
-                Statement stmt = con.createStatement();
-                ResultSet res = stmt.executeQuery("SELECT t1.task_name , t2.category_name , t1.limit_date , t3.user_name , t4.status_name , t1.memo FROM task_db.t_task t1 LEFT JOIN task_db.m_category t2 ON t1.category_id = t2.category_id LEFT JOIN task_db.m_user t3 ON t1.user_id = t3.user_id  LEFT JOIN task_db.m_status t4 ON t1.status_code = t4.status_code ORDER BY user_name")) {
+		List<TaskCategoryBean> taskList = new ArrayList<TaskCategoryBean>();
 
-            // 結果の操作
-            while (res.next()) {
-                String taskName = res.getString("task_name");
-                String categoryName = res.getString("category_name");
-                Date date = res.getDate("limit_date");
-                LocalDate limitDate = date.toLocalDate();
-                String userId = res.getString("user_name");
-                String statusName = res.getString("status_name");
-                String memo = res.getString("memo");
+		try (Connection con = ConnectionManager.getConnection();
+				Statement stmt = con.createStatement();
+				ResultSet res = stmt.executeQuery(
+						"SELECT t1.task_name , t2.category_name , t1.limit_date , t3.user_name , t4.status_name , t1.memo FROM task_db.t_task t1 LEFT JOIN task_db.m_category t2 ON t1.category_id = t2.category_id LEFT JOIN task_db.m_user t3 ON t1.user_id = t3.user_id  LEFT JOIN task_db.m_status t4 ON t1.status_code = t4.status_code ORDER BY user_name")) {
 
-                TaskCategoryBean task = new TaskCategoryBean();
-                task.setTaskName(taskName);
-                task.setCategoryName(categoryName);
-                task.setLimitDate(limitDate);
-                task.setUserName(userId);
-                task.setStatusName(statusName);
-                task.setMemo(memo);
+			// 結果の操作
+			while (res.next()) {
+				String taskName = res.getString("task_name");
+				String categoryName = res.getString("category_name");
+				Date date = res.getDate("limit_date");
+				LocalDate limitDate = date.toLocalDate();
+				String userId = res.getString("user_name");
+				String statusName = res.getString("status_name");
+				String memo = res.getString("memo");
 
-                taskList.add(task);
+				TaskCategoryBean task = new TaskCategoryBean();
+				task.setTaskName(taskName);
+				task.setCategoryName(categoryName);
+				task.setLimitDate(limitDate);
+				task.setUserName(userId);
+				task.setStatusName(statusName);
+				task.setMemo(memo);
 
-            }
-        }
-        return taskList;
-    }
-    
-    public int updateTask(TaskCategoryBean taskResult) {
-    	
-    }
-    public int deleteTask(TaskCategoryBean taskResult) {
-    	
-    }
-    
-    
-    
+				taskList.add(task);
 
+			}
+		}
+		return taskList;
+	}
+
+	public TaskCategoryBean selectTask(int taskId) throws SQLException, ClassNotFoundException {
+		TaskCategoryBean taskDetail = null;
+		String sql = "SELECT t1.task_name , t2.category_name , t1.limit_date , t3.user_name , t4.status_name , t1.memo FROM task_db.t_task t1 LEFT JOIN task_db.m_category t2 ON t1.category_id = t2.category_id LEFT JOIN task_db.m_user t3 ON t1.user_id = t3.user_id  LEFT JOIN task_db.m_status t4 ON t1.status_code = t4.status_code WHERE t1.task_id = ?";
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setInt(1, taskId);
+
+			ResultSet res = pstmt.executeQuery();
+
+			if (res.next()) {
+				taskDetail = new TaskCategoryBean();
+				taskDetail.setTaskName(res.getString("task_name"));
+				taskDetail.setCategoryName(res.getString("category_name"));
+
+				// Date型からLocalDate型に変換
+				Date dateFromDB = res.getDate("limit_date");
+				LocalDate limitDate = dateFromDB.toLocalDate();
+				taskDetail.setLimitDate(limitDate);
+
+				taskDetail.setUserName(res.getString("user_name"));
+				taskDetail.setStatusName(res.getString("status_name"));
+				taskDetail.setMemo(res.getString("memo"));
+			}
+		}
+		return taskDetail;
+	}
+
+	public int deleteTask(int taskId) throws SQLException, ClassNotFoundException {
+
+		String sql = "DELETE FROM t_task WHERE task_id = ?";
+		int processingNumber = 0; //処理件数
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);) {
+			// プレースホルダへの値の設定
+			pstmt.setInt(1, taskId);
+			processingNumber = pstmt.executeUpdate();
+		}
+		return processingNumber;
+	}
 }
