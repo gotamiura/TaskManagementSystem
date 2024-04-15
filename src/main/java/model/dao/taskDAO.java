@@ -35,29 +35,19 @@ public class taskDAO {
 	}
 	
 	public int insert(TaskBean taskBean) throws ClassNotFoundException, SQLException {
-		
-		int count = 0;
-		try (Connection con = ConnectionManager.getConnection();
-				PreparedStatement pstmt = con.prepareStatement("INSERT INTO t_task(task_name,category_id, limit_date,user_id,status_code,memo) VALUES (?, ?, ?, ?, ?,?)")) {
-				
-				/*String task_name = res.getString("task_name");
-				int category_id = res.getInt("category_id");
-				Date limit_date = res.getDate("limit_date");
-				String user_id = res.getString("user_id");
-				//Reader status_code = res.getCharacterStream("status_code");
-				String memo	= res.getString("memo");*/
-				
-				pstmt.setString(1,taskBean.getTask_name());
-				pstmt.setInt(2,taskBean.getCategory_id());
-				pstmt.setDate(3,taskBean.getLimit_date());
-				pstmt.setString(4,taskBean.getUser_id());
-				pstmt.setCharacterStream(5, "99");
-				pstmt.setString(5,taskBean.getMemo());
-				
-				count = pstmt.executeUpdate();
-		}
-		
-		return count;
-		
+	    int count = 0;
+	    try (Connection con = ConnectionManager.getConnection();
+	         PreparedStatement pstmt = con.prepareStatement("INSERT INTO t_task(task_name, category_id, limit_date, user_id, status_code, memo) VALUES (?, ?, ?, ?, ?, ?)")) {
+
+	        pstmt.setString(1, taskBean.getTask_name());
+	        pstmt.setInt(2, taskBean.getCategory_id());
+	        pstmt.setDate(3, taskBean.getLimit_date());
+	        pstmt.setString(4, taskBean.getUser_id());
+	        pstmt.setString(5, taskBean.getStatus_code()); 
+	        pstmt.setString(6, taskBean.getMemo()); // 6番目のパラメータにmemoをセット
+
+	        count = pstmt.executeUpdate();
+	    }
+	    return count;
 	}
 }

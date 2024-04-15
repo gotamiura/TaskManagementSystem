@@ -6,12 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>タスク一覧画面</title>
+<style>
+    .action-buttons {
+        display: inline-block;
+        margin-right: 5px;
+    }
+</style>
 </head>
 <body>
     <%
-        List<TaskCategoryBean> taskList = (List<TaskCategoryBean>) request.getAttribute("taskList");
-		// 日付フォーマットの設定
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd"); 
+    List<TaskCategoryBean> taskList = (List<TaskCategoryBean>) request.getAttribute("taskList");
     %>
     <h1>タスク一覧画面</h1>
     <hr>
@@ -26,22 +30,30 @@
             <th>メモ</th>
         </tr>
         <%
-            if (taskList != null) {
-                for (TaskCategoryBean task : taskList) {
+        if (taskList != null) {
+            for (TaskCategoryBean task : taskList) {
         %>
         <tr>
-            <td><a
-                href="task-alter-form.jsp?task_name=<%=task.getTaskName()%>"><%=task.getTaskName()%></a>
-            </td>
+            <td><%=task.getTaskName()%></td>
             <td><%=task.getCategoryName()%></td>
-            <td><%=task.getLimitDate()%></td> 
+            <td><%=task.getLimitDate()%></td>
             <td><%=task.getUserName()%></td>
             <td><%=task.getStatusName()%></td>
             <td><%=task.getMemo()%></td>
+            <td class="action-buttons">
+                <form action="task-alter-form.jsp" method="POST">
+                    <input type="submit" value="変更">
+                </form>
+            </td>
+            <td class="action-buttons">
+                <form action="task-delete-confirm.jsp" method="POST">
+                    <input type="submit" value="削除">
+                </form>
+            </td>
         </tr>
         <%
-                }
             }
+        }
         %>
     </table>
 
