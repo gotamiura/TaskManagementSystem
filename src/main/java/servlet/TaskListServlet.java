@@ -37,7 +37,8 @@ public class TaskListServlet extends HttpServlet {
 		}
 		
 		// リクエストスコープへの属性の設定
-		request.setAttribute("taskList", taskList);
+		HttpSession session = request.getSession();
+		session.setAttribute("taskList", taskList);
 
 		// 商品一覧画面への転送
 		RequestDispatcher rd = request.getRequestDispatcher("task-list.jsp");
