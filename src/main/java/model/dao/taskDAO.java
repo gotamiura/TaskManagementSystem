@@ -50,6 +50,7 @@ public class taskDAO {
 	 * @throws SQLException
 	 */
 	public int insert(TaskBean taskBean) throws ClassNotFoundException, SQLException {
+<<<<<<< HEAD
 		
 		int count = 0;
 		try (Connection con = ConnectionManager.getConnection();
@@ -97,3 +98,21 @@ public List<UserBean> getUserName() throws ClassNotFoundException, SQLException 
 		
 	}
 }
+=======
+	    int count = 0;
+	    try (Connection con = ConnectionManager.getConnection();
+	         PreparedStatement pstmt = con.prepareStatement("INSERT INTO t_task(task_name, category_id, limit_date, user_id, status_code, memo) VALUES (?, ?, ?, ?, ?, ?)")) {
+
+	        pstmt.setString(1, taskBean.getTask_name());
+	        pstmt.setInt(2, taskBean.getCategory_id());
+	        pstmt.setDate(3, taskBean.getLimit_date());
+	        pstmt.setString(4, taskBean.getUser_id());
+	        pstmt.setString(5, taskBean.getStatus_code()); 
+	        pstmt.setString(6, taskBean.getMemo()); // 6番目のパラメータにmemoをセット
+
+	        count = pstmt.executeUpdate();
+	    }
+	    return count;
+	}
+}
+>>>>>>> 4504aa5fb0a810aefde398e0786e697d13e76376
