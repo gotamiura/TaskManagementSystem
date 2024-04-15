@@ -15,7 +15,7 @@
 </head>
 <body>
     <%
-    List<TaskCategoryBean> taskList = (List<TaskCategoryBean>) request.getAttribute("taskList");
+    List<TaskCategoryBean> taskList = (List<TaskCategoryBean>) session.getAttribute("taskList");
     %>
     <h1>タスク一覧画面</h1>
     <hr>
@@ -41,7 +41,7 @@
             <td><%=task.getStatusName()%></td>
             <td><%=task.getMemo()%></td>
             <td class="action-buttons">
-                <form action="task-alter-form.jsp" method="POST">
+               <form action="TaskAlterServlet" method="get">
                     <input type="submit" value="変更">
                 </form>
             </td>

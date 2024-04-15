@@ -2,10 +2,10 @@ package model.dao;
 
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,8 +35,7 @@ public class TaskCategoryDAO {
             while (res.next()) {
                 String taskName = res.getString("task_name");
                 String categoryName = res.getString("category_name");
-                Date date = res.getDate("limit_date");
-                LocalDate limitDate = date.toLocalDate();
+                Date limitDate = res.getDate("limit_date");
                 String userId = res.getString("user_name");
                 String statusName = res.getString("status_name");
                 String memo = res.getString("memo");
@@ -55,15 +54,24 @@ public class TaskCategoryDAO {
         }
         return taskList;
     }
-    
-    public int updateTask(TaskCategoryBean taskResult) {
-    	
-    }
-    public int deleteTask(TaskCategoryBean taskResult) {
-    	
-    }
-    
-    
-    
+    public int updateTask(TaskCategoryBean taskResult) throws ClassNotFoundException, SQLException {
+    	int processingNumber = 0; //処理件数
 
+		String sql = "UPDATE t_task SET task_name = ?, category_id = ?, limit_date = ?, user_id =?, status_code=?, memo =? WHERE task_id = ?";
+
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);) {
+			// プレースホルダへの値の設定
+			pstmt.setString(1, taskResult.getTaskName());
+			pstmt.setString(2, taskResult.getCategoryName());
+			pstmt.setDate(3, taskResult.getLimitDate());
+			pstmt.setString(4, taskResult.getUserId());
+			pstmt.setString(5,taskResult.getStatusCode());
+			pstmt.setString(6, taskResult.getMemo());
+			pstmt.setString(7, "1");
+			processingNumber = pstmt.executeUpdate();
+		}
+		return processingNumber;
+    	
+    }
 }
