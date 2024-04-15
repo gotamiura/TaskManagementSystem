@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.List, model.entity.TaskBean, model.entity.CategoryBean"%>
+    pageEncoding="UTF-8" import="java.util.List, model.entity.TaskBean, model.entity.CategoryBean,model.entity.UserBean"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +8,7 @@
 </head>
 <body>
 	<% List<CategoryBean> category = (List<CategoryBean>)session.getAttribute("TaskCategory");%>
+	<% List<UserBean> userName = (List<UserBean>)session.getAttribute("PersoninCharge"); %>
 	<form action="TaskRegisterServlet" method="post">
 	<h1>タスク登録画面</h1>
 	<hr>
@@ -30,7 +31,12 @@
 		</tr>
 		<tr>
 			<th>担当者情報</th>
-			<td><input type="text" name="userName" maxlength= "24" required></td>
+			<td><select name= "personIncharge">
+			<%for(UserBean personIncharge : userName){ %>
+				<option value = <%=personIncharge.getUser_id()%>><%=personIncharge.getUser_name()%></option>
+			<%} %>	
+			</select></td>
+			<% %>
 		</tr>
 		<tr>
 			<th>ステータス情報</th>

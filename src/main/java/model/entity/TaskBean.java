@@ -9,7 +9,7 @@ public class TaskBean {
 	private int category_id;
 	private Date limit_date;
 	private String user_id;
-	private Character status_code;
+	private String status_code;
 	private String memo;
 	private Timestamp create_datetime;
 	private Timestamp update_datetime;
@@ -76,13 +76,13 @@ public class TaskBean {
 	/**
 	 * @return status_code
 	 */
-	public Character getStatus_code() {
+	public String getStatus_code() {
 		return status_code;
 	}
 	/**
 	 * @param status_code セットする status_code
 	 */
-	public void setStatus_code(Character status_code) {
+	public void setStatus_code(String status_code) {
 		this.status_code = status_code;
 	}
 	/**
