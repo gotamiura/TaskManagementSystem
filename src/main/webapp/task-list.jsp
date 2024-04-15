@@ -42,11 +42,13 @@
             <td><%=task.getMemo()%></td>
             <td class="action-buttons">
                 <form action="task-alter-form.jsp" method="POST">
+                    <input type="hidden" name="task_id" value="<%=task.getTaskId()%>">
                     <input type="submit" value="変更">
                 </form>
             </td>
             <td class="action-buttons">
-                <form action="task-delete-confirm.jsp" method="POST">
+                <form action="TaskDeleteConfirmationServlet" method="POST">
+                    <input type="hidden" name="task_id" value="<%=task.getTaskId()%>">
                     <input type="submit" value="削除">
                 </form>
             </td>
@@ -56,12 +58,5 @@
         }
         %>
     </table>
-
-    <br>
-    <div>
-        <form action="menu.jsp" method="POST">
-            <input type="submit" value="メニュー画面へ">
-        </form>
-    </div>
 </body>
 </html>
