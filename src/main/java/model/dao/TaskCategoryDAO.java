@@ -55,5 +55,15 @@ public class TaskCategoryDAO {
         }
         return taskList;
     }
+    
+    public int updateTask(TaskCategoryBean taskResult) {
+    	
+    }
+    public int deleteTask(TaskCategoryBean taskResult) {
+    	
+    }
+    
+    
+    
 
 }
