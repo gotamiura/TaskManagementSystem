@@ -10,7 +10,6 @@ import java.util.List;
 import model.entity.CategoryBean;
 import model.entity.TaskBean;
 import model.entity.UserBean;
-
 public class taskDAO {
 	
 	/**
@@ -80,7 +79,7 @@ public List<UserBean> getUserName() throws ClassNotFoundException, SQLException 
 		List<UserBean> userList = new ArrayList<UserBean>();
 		
 		try (Connection con = ConnectionManager.getConnection();
-				PreparedStatement pstmt = con.prepareStatement("SELECT user_id, user_name FROM m_user")) {
+				PreparedStatement pstmt = con.prepareStatement("SELECT * FROM m_user")) {
 			ResultSet res = pstmt.executeQuery();
 
 			while (res.next()) {

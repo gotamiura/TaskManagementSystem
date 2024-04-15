@@ -49,7 +49,7 @@ public class TaskRegisterServlet extends HttpServlet {
 		// DAOのインスタンス化
 		taskDAO dao = new taskDAO();
 		String taskName = request.getParameter("taskName");
-		String userName = request.getParameter("userName");
+		String userName = request.getParameter("personIncharge");
 		String memo = request.getParameter("memo");
 		// Beanのインスタンス化
 		TaskBean taskBean = new TaskBean();
