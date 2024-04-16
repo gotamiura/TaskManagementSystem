@@ -8,12 +8,12 @@
 <title>タスク編集画面</title>
 </head>
 <body>
-	<% List<CategoryBean> categoryList = (List<CategoryBean>)session.getAttribute("TaskCategory");%>
+	<% List<CategoryBean> categorysList = (List<CategoryBean>)session.getAttribute("TaskCategory");%>
 	<% List<UserBean> userNameList = (List<UserBean>)session.getAttribute("PersoninCharge"); %>
 	<%
 	TaskCategoryBean taskList = (TaskCategoryBean)session.getAttribute("TaskDetail");
     %>
-	<form action="TaskRegisterServlet" method="post">
+	<form action="TaskAlterServlet" method="post">
 	<h1>タスク編集画面</h1>
 	<hr>
 	<table border="1">
@@ -24,9 +24,9 @@
 		<tr>
 			<th>カテゴリ情報</th>
 			<td><select name="categoryName">
-				<option value ="<%=categoryList.get(0).getCategory_id()%>"><%=categoryList.get(0).getCategory_name()%></option>
-				<%for (CategoryBean category : categoryList){ %>
-						<%if(!category.getCategory_name().equals(categoryList.get(0).getCategory_name())) {%>
+				<option value ="<%=taskList.getCategoryId()%>"><%=taskList.getCategoryName()%></option>
+				<%for (CategoryBean category : categorysList){ %>
+						<%if(!category.getCategory_name().equals(taskList.getCategoryName())) {%>
 							<option value="<%=category.getCategory_id()%>"><%=category.getCategory_name()%></option>
 						<%} %>
 				<%} %>
