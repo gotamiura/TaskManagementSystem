@@ -44,32 +44,5 @@ public class TaskListServlet extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("task-list.jsp");
 		rd.forward(request, response);
 	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-	        throws ServletException, IOException {
-	    // リクエストのエンコーディング方式を指定
-	    request.setCharacterEncoding("UTF-8");
-
-	    // 選択されたタスクのIDを取得
-	    int taskId = Integer.parseInt(request.getParameter("task_id"));
-
-	    TaskCategoryDAO dao = new TaskCategoryDAO();
-	    TaskCategoryBean taskDetail = null;
-
-	    try {
-	        // 選択されたタスクの詳細情報を取得
-	        taskDetail = dao.selectTask(taskId);
-	    } catch (SQLException | ClassNotFoundException e) {
-	        e.printStackTrace();
-	    }
-
-	    // 取得した詳細情報をセッションに保存
-	    HttpSession session = request.getSession();
-	    session.setAttribute("taskDetail", taskDetail);
-
-	    // リダイレクトまたはフォワード先の指定
-	    response.sendRedirect("task-list.jsp"); 
-
-	}
 
 }
