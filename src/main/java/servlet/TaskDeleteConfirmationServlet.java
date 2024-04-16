@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.dao.TaskListDAO;
+import model.dao.TaskDetailDAO;
 import model.entity.TaskCategoryBean;
 
 /**
@@ -24,7 +24,7 @@ public class TaskDeleteConfirmationServlet extends HttpServlet {
         int taskId = Integer.parseInt(request.getParameter("task_id"));
 
         // タスクのIDを使って詳細情報を取得
-        TaskListDAO dao = new TaskListDAO();
+        TaskDetailDAO dao = new TaskDetailDAO();
         TaskCategoryBean taskDetail = null;
         try {
             taskDetail = dao.selectTask(taskId); // データベースから詳細情報を取得
