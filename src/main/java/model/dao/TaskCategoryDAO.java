@@ -31,10 +31,11 @@ public class TaskCategoryDAO {
 		try (Connection con = ConnectionManager.getConnection();
 				Statement stmt = con.createStatement();
 				ResultSet res = stmt.executeQuery(
-						"SELECT t1.task_name , t2.category_name , t1.limit_date , t3.user_name , t4.status_name , t1.memo FROM task_db.t_task t1 LEFT JOIN task_db.m_category t2 ON t1.category_id = t2.category_id LEFT JOIN task_db.m_user t3 ON t1.user_id = t3.user_id  LEFT JOIN task_db.m_status t4 ON t1.status_code = t4.status_code ORDER BY user_name")) {
+						"SELECT t1.task_id, t1.task_name , t2.category_name , t1.limit_date , t3.user_name , t4.status_name , t1.memo FROM task_db.t_task t1 LEFT JOIN task_db.m_category t2 ON t1.category_id = t2.category_id LEFT JOIN task_db.m_user t3 ON t1.user_id = t3.user_id  LEFT JOIN task_db.m_status t4 ON t1.status_code = t4.status_code ORDER BY user_name")) {
 
 			// 結果の操作
 			while (res.next()) {
+				int task_id = res.getInt("task_id");
 				String taskName = res.getString("task_name");
 				String categoryName = res.getString("category_name");
 				Date date = res.getDate("limit_date");
@@ -44,6 +45,7 @@ public class TaskCategoryDAO {
 				String memo = res.getString("memo");
 
 				TaskCategoryBean task = new TaskCategoryBean();
+				task.setTaskId(task_id);
 				task.setTaskName(taskName);
 				task.setCategoryName(categoryName);
 				task.setLimitDate(Date.valueOf(limitDate));

@@ -15,9 +15,8 @@ import javax.servlet.http.HttpSession;
 
 import model.dao.TaskCategoryDAO;
 import model.dao.taskDAO;
-import model.entity.CategoryBean;
+import model.entity.TMSBean;
 import model.entity.TaskCategoryBean;
-import model.entity.UserBean;
 
 /**
  * Servlet implementation class TaskAlterServlet
@@ -25,17 +24,20 @@ import model.entity.UserBean;
 @WebServlet("/TaskAlterServlet")
 public class TaskAlterServlet extends HttpServlet {
 	
+	private static final String task_id = null;
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		taskDAO dao = new taskDAO();
+		TMSBean bean = new TMSBean();
 		try {
-			List<CategoryBean> category = dao.getCategory();
-			List<UserBean> users = dao.getUserName();
+			int taskId =Integer.parseInt(request.getParameter("task_id"));
+			List<TMSBean> task = dao.getTask(taskId);
 			HttpSession session = request.getSession();
-			session.setAttribute("TaskCategory", category);
-			session.setAttribute("PersoninCharge", users);
+			session.setAttribute("TaskDetail", task);
+			
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
