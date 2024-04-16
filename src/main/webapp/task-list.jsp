@@ -51,7 +51,6 @@
 					<input type="hidden" name="taskId" value="<%=task.getTaskId()%>">
 					<input type="submit" value="削除">
 				</form>
-
 			</td>
 		</tr>
 		<%
