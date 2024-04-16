@@ -46,7 +46,7 @@ public class TaskCategoryDAO {
 				TaskCategoryBean task = new TaskCategoryBean();
 				task.setTaskName(taskName);
 				task.setCategoryName(categoryName);
-				task.setLimitDate(limitDate);
+				task.setLimitDate(Date.valueOf(limitDate));
 				task.setUserName(userId);
 				task.setStatusName(statusName);
 				task.setMemo(memo);
@@ -75,7 +75,8 @@ public class TaskCategoryDAO {
 				// Date型からLocalDate型に変換
 				Date dateFromDB = res.getDate("limit_date");
 				LocalDate limitDate = dateFromDB.toLocalDate();
-				taskDetail.setLimitDate(limitDate);
+				taskDetail.setLimitDate(Date.valueOf(limitDate));
+
 
 				taskDetail.setUserName(res.getString("user_name"));
 				taskDetail.setStatusName(res.getString("status_name"));
@@ -97,4 +98,26 @@ public class TaskCategoryDAO {
 		}
 		return processingNumber;
 	}
+            
+    public int updateTask(TaskCategoryBean taskResult) throws ClassNotFoundException, SQLException {
+    	int processingNumber = 0; //処理件数
+
+		String sql = "UPDATE t_task SET task_name = ?, category_id = ?, limit_date = ?, user_id =?, status_code=?, memo =? WHERE task_id = ?";
+
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);) {
+			// プレースホルダへの値の設定
+			pstmt.setString(1, taskResult.getTaskName());
+			pstmt.setString(2, taskResult.getCategoryName());
+			pstmt.setDate(3, taskResult.getLimitDate());
+			pstmt.setString(4, taskResult.getUserId());
+			pstmt.setString(5,taskResult.getStatusCode());
+			pstmt.setString(6, taskResult.getMemo());
+			pstmt.setString(7, "1");
+			processingNumber = pstmt.executeUpdate();
+		}
+		return processingNumber;
+    	
+    }
+
 }
