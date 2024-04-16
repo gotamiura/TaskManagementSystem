@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -15,8 +14,9 @@ import javax.servlet.http.HttpSession;
 
 import model.dao.TaskCategoryDAO;
 import model.dao.taskDAO;
-import model.entity.TMSBean;
+import model.entity.CategoryBean;
 import model.entity.TaskCategoryBean;
+import model.entity.UserBean;
 
 /**
  * Servlet implementation class TaskAlterServlet
@@ -29,13 +29,18 @@ public class TaskAlterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		taskDAO dao = new taskDAO();
-		TMSBean bean = new TMSBean();
+		TaskCategoryDAO dao = new TaskCategoryDAO();
 		try {
 			int taskId =Integer.parseInt(request.getParameter("task_id"));
-			List<TMSBean> task = dao.getTask(taskId);
+			TaskCategoryBean task = dao.selectTask(taskId);
 			HttpSession session = request.getSession();
 			session.setAttribute("TaskDetail", task);
+			
+			taskDAO taskdao = new taskDAO();
+			List<CategoryBean> category = taskdao.getCategory();
+			List<UserBean> users = taskdao.getUserName();
+			session.setAttribute("TaskCategory", category);
+			session.setAttribute("PersoninCharge", users);
 			
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
@@ -49,15 +54,28 @@ public class TaskAlterServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/*TaskCategoryDAO dao = new TaskCategoryDAO();
 		
-		// リクエストのエンコーディング方式を指定
+		try {
+			int taskId =Integer.parseInt(request.getParameter("task_id"));
+			TaskCategoryBean task = dao.selectTask(taskId);
+			HttpSession session = request.getSession();
+			session.setAttribute("TaskDetail", task);
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		
+		RequestDispatcher rd = request.getRequestDispatcher("task-alter-form.jsp");
+		rd.forward(request, response);*/
+		/*// リクエストのエンコーディング方式を指定
 		request.setCharacterEncoding("UTF-8");
 		// セッションオブジェクトの取得
 		HttpSession session = request.getSession();
 		// 使用するクラスのインスタンス化
 		TaskCategoryDAO dao = new TaskCategoryDAO();
 		TaskCategoryBean updateItem = new TaskCategoryBean();
-		
+		updateItem.setTaskId((int)session.getAttribute("task_id"));
 		updateItem.setStatusName(request.getParameter("taskName"));
 		updateItem.setCategoryName(request.getParameter("categoryCode"));
 		updateItem.setLimitDate(Date.valueOf(request.getParameter("deadLine")));
@@ -80,7 +98,7 @@ public class TaskAlterServlet extends HttpServlet {
 			url = "update-failure.jsp";
 		}
 		RequestDispatcher rd = request.getRequestDispatcher(url);
-		rd.forward(request, response);
+		rd.forward(request, response);*/
 			
 	}
 

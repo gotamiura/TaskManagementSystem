@@ -43,7 +43,7 @@
 			<td><%=task.getMemo()%></td>
 			
 			<td class="action-buttons">
-				<form action="TaskAlterServlet" method="get">
+				<form action="TaskAlterServlet" method="GET">
 					<input type="hidden" name="task_id" value="<%=task.getTaskId()%>">
 					<input type="submit" value="変更">
 				</form>
