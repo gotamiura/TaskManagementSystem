@@ -23,8 +23,7 @@ import model.entity.TaskCategoryBean;
  */
 @WebServlet("/TaskAlterServlet")
 public class TaskAlterServlet extends HttpServlet {
-	
-	private static final String task_id = null;
+
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
