@@ -13,7 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.dao.TaskListDAO;
+import model.dao.TaskDetailDAO;
+import model.dao.UpdateDAO;
 import model.dao.taskDAO;
 import model.entity.CategoryBean;
 import model.entity.TaskCategoryBean;
@@ -30,7 +31,7 @@ public class TaskAlterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		TaskListDAO dao = new TaskListDAO();
+		TaskDetailDAO dao = new TaskDetailDAO();
 		try {
 			int taskId =Integer.parseInt(request.getParameter("task_id"));
 			TaskCategoryBean task = dao.selectTask(taskId);
@@ -61,7 +62,7 @@ public class TaskAlterServlet extends HttpServlet {
 		// セッションオブジェクトの取得
 		HttpSession session = request.getSession();
 		// 使用するクラスのインスタンス化
-		TaskCategoryDAO dao = new TaskCategoryDAO();
+		UpdateDAO dao = new UpdateDAO();
 		TaskCategoryBean updateItem = new TaskCategoryBean();
 		updateItem.setStatusName(request.getParameter("taskName"));
 		updateItem.setCategoryName(request.getParameter("categoryCode"));
