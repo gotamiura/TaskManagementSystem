@@ -45,15 +45,20 @@
 			<td class="action-buttons">
 				<form action="TaskAlterServlet" method="get">
 					<input type="hidden" name="task_id" value="<%=task.getTaskId()%>">
+<<<<<<< HEAD
 					<input type="submit" value="削除">
+=======
+					<input type="submit" value="変更">
+>>>>>>> 5c45f6a2346f57aa7db21272b639b03ae5f80437
 				</form>
 			</td>
 			
 			<td class="action-buttons">
-				<form action="TaskDeleteConfirmationServlet" method="POST">
-					<input type="hidden" name="task_id" value="<%=task.getTaskId()%>">
+				<form action="TaskDeleteServlet" method="POST">
+					<input type="hidden" name="taskId" value="<%=task.getTaskId()%>">
 					<input type="submit" value="削除">
 				</form>
+
 			</td>
 		</tr>
 		<%
@@ -62,12 +67,12 @@
 		%>
 	</table>
 
-    <br>
-    <div>
-        <form action="menu.jsp" method="POST">
-            <input type="submit" value="メニュー画面へ">
-        </form>
-    </div>
+	<br>
+	<div>
+		<form action="menu.jsp" method="GET">
+			<input type="submit" value="メニュー画面へ">
+		</form>
+	</div>
 
 </body>
 </html>
