@@ -43,7 +43,7 @@
 	</table>
 	<br>
 	<form action="TaskDeleteServlet" method="POST">
-		<input type="hidden" name="task_id"
+		<input type="hidden" name="TaskId"
 			value="<%=taskDetail.getTaskId()%>"> <input type="submit"
 			value="削除する">
 	</form>

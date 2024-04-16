@@ -35,15 +35,7 @@ public class TaskCategoryBean {
 	/**
 	 * @return taskId
 	 */
-	public int getTaskId() {
-		return taskId;
-	}
-	/**
-	 * @param taskId セットする taskId
-	 */
-	public void setTaskId(int taskId) {
-		this.taskId = taskId;
-	}
+
 	/**
 	 * @return taskId
 	 */

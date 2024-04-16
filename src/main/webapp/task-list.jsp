@@ -47,8 +47,8 @@
 				</form>
 			</td>
 			<td class="action-buttons">
-				<form action="TaskDeleteConfirmationServlet" method="POST">
-					<input type="hidden" name="task_id" value="<%=task.getTaskId()%>">
+				<form action="task-delete-confirm.jsp" method="POST">
+					<input type="hidden" name="TaskId" value="<%=task.getTaskId()%>">
 					<input type="submit" value="削除">
 				</form>
 			</td>
