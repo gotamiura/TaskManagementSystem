@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.List, model.entity.TaskBean, model.entity.CategoryBean,model.entity.UserBean
-    ,model.entity.TaskCategoryBean"%>
+    ,model.entity.TMSBean"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,8 +10,8 @@
 <body>
 	<% List<CategoryBean> category = (List<CategoryBean>)session.getAttribute("TaskCategory");%>
 	<% List<UserBean> userName = (List<UserBean>)session.getAttribute("PersoninCharge"); %>
-	 <%
-    List<TaskCategoryBean> taskList = (List<TaskCategoryBean>) session.getAttribute("taskList");
+	<%
+    List<TMSBean> taskList = (List<TMSBean>) session.getAttribute("TaskDetail");
     %>
 	<form action="TaskRegisterServlet" method="post">
 	<h1>タスク編集画面</h1>
@@ -19,19 +19,15 @@
 	<table border="1">
 		<tr>
 			<th>タスク名</th>
-			<td><input type="text" name="taskName" maxlength= "50" required></td>
+			<td><input type="text" name="taskName" maxlength= "50" value = "<%=taskList.get(0).getTask_name() %>"required></td>
 		</tr>
 		<tr>
 			<th>カテゴリ情報</th>
-			<td><select name= "categoryCode">
-			<%for(CategoryBean categoryName : category){ %>
-				<option value = <%=categoryName.getCategory_id()%>><%=categoryName.getCategory_name()%></option>
-			<%} %>	
-			</select></td>
+			<td><input type="text" name="categoryName" maxlength= "20" value = "<%=taskList.get(0).getCategory_name() %>"required></td>
 		</tr>
 		<tr>
 			<th>期限</th>
-			<td><input type="date" name="deadLine" ></td>
+			<td><input type="date" name="deadLine" value = "<%=taskList.get(0).getLimit_date() %>"></td>
 		</tr>
 		<tr>
 			<th>担当者情報</th>
@@ -52,7 +48,7 @@
 		</tr>
 		<tr>
 			<th>メモ</th>
-			<td><input type="text" name="memo" maxlength= "100"></td>
+			<td><input type="text" name="memo" maxlength= "100" value = "<%=taskList.get(0).getMemo() %>"></td>
 		</tr>
 	</table><br>
 	<input type="submit" value="編集実行">

@@ -11,6 +11,7 @@
 	display: inline-block;
 	margin-right: 5px;
 }
+
 </style>
 </head>
 <body>
@@ -40,12 +41,14 @@
 			<td><%=task.getUserName()%></td>
 			<td><%=task.getStatusName()%></td>
 			<td><%=task.getMemo()%></td>
+			
 			<td class="action-buttons">
 				<form action="TaskAlterServlet" method="get">
-				<input type="hidden" name="task_id" value="<%=task.getTaskId()%>">
-				<input type="submit" value="変更">
+					<input type="hidden" name="task_id" value="<%=task.getTaskId()%>">
+					<input type="submit" value="削除">
 				</form>
 			</td>
+			
 			<td class="action-buttons">
 				<form action="TaskDeleteConfirmationServlet" method="POST">
 					<input type="hidden" name="task_id" value="<%=task.getTaskId()%>">

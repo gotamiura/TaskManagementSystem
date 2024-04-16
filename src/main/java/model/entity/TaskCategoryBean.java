@@ -32,12 +32,7 @@ public class TaskCategoryBean {
 	public void setLimitDate(Date limitDate) {
 		this.limitDate = limitDate;
 	}
-	/**
-	 * @return taskId
-	 */
-	public int getTaskId() {
-		return taskId;
-	}
+	
 	/**
 	 * @param taskId セットする taskId
 	 */
@@ -50,12 +45,7 @@ public class TaskCategoryBean {
 	public int getTaskId() {
 		return taskId;
 	}
-	/**
-	 * @param taskId セットする taskId
-	 */
-	public void setTaskId(int taskId) {
-		this.taskId = taskId;
-	}
+	
 	/**
 	 * @return taskName
 	 */
