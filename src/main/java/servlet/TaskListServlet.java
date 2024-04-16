@@ -16,14 +16,16 @@ import model.dao.TaskCategoryDAO;
 import model.entity.TaskCategoryBean;
 
 /**
- * Servlet implementation class ItemListServlet
+ * TaskCategoryDAOを使った業務処理を行うクラスです。
+ * @author goutamiura
  */
 @WebServlet("/TaskListServlet")
 public class TaskListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @param HttpServletRequest request, HttpServletResponse response この引数は使用しない
+	 * @throws ServletException, IOException
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -35,7 +37,7 @@ public class TaskListServlet extends HttpServlet {
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		
+
 		// リクエストスコープへの属性の設定
 		HttpSession session = request.getSession();
 		session.setAttribute("taskList", taskList);

@@ -42,8 +42,8 @@
         </tr>
     </table>
     <br>
-    <form action="TaskDeleteServlet" method="POST">
-        <input type="hidden" name="TaskId"
+    <form action="TaskDeleteResultServlet" method="POST">
+        <input type="hidden" name="taskId"
             value="<%=taskDetail.getTaskId()%>"> <input type="submit"
             value="削除する">
     </form>
