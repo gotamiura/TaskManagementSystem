@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.dao.TaskCategoryDAO;
+import model.dao.TaskDetailDAO;
 import model.entity.TaskCategoryBean;
 
 /**
@@ -30,7 +30,7 @@ public class TaskDeleteServlet extends HttpServlet {
 		int taskId = Integer.parseInt(request.getParameter("taskId"));
 
 		// TaskCategoryDAOをインスタンス化
-		TaskCategoryDAO dao = new TaskCategoryDAO();
+		TaskDetailDAO dao = new TaskDetailDAO();
 
 		try {
 			// タスクIDを元にタスク詳細を取得
