@@ -28,16 +28,14 @@ public class TaskListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		List<TaskCategoryBean> taskList = null;
-		// DAOの生成
 		TaskCategoryDAO dao = new TaskCategoryDAO();
 
 		try {
-			// 商品マスタから商品情報を取得
-			taskList = dao.selectAll();
+			taskList = dao.selectAll();// 商品マスタから商品情報を取得
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-
+		
 		// リクエストスコープへの属性の設定
 		HttpSession session = request.getSession();
 		session.setAttribute("taskList", taskList);
@@ -46,4 +44,5 @@ public class TaskListServlet extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("task-list.jsp");
 		rd.forward(request, response);
 	}
+
 }

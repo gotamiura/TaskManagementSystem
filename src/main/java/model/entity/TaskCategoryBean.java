@@ -17,6 +17,33 @@ public class TaskCategoryBean {
 	private String statusName;
 	private String statusCode;
 	private String memo;
+	
+	
+
+	/**
+	 * @return limitDate
+	 */
+	public Date getLimitDate() {
+		return limitDate;
+	}
+	/**
+	 * @param limitDate セットする limitDate
+	 */
+	public void setLimitDate(Date limitDate) {
+		this.limitDate = limitDate;
+	}
+	/**
+	 * @return taskId
+	 */
+	public int getTaskId() {
+		return taskId;
+	}
+	/**
+	 * @param taskId セットする taskId
+	 */
+	public void setTaskId(int taskId) {
+		this.taskId = taskId;
+	}
 	/**
 	 * @return taskId
 	 */
@@ -64,18 +91,6 @@ public class TaskCategoryBean {
 	 */
 	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
-	}
-	/**
-	 * @return limitDate
-	 */
-	public Date getLimitDate() {
-		return limitDate;
-	}
-	/**
-	 * @param limitDate セットする limitDate
-	 */
-	public void setLimitDate(Date limitDate) {
-		this.limitDate = limitDate;
 	}
 	/**
 	 * @return userName
@@ -137,5 +152,6 @@ public class TaskCategoryBean {
 	public void setMemo(String memo) {
 		this.memo = memo;
 	}
+	
 	
 }
