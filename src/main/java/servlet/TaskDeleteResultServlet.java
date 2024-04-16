@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.dao.TaskCategoryDAO;
+import model.dao.DeleteDAO;
+import model.dao.TaskDetailDAO;
 import model.entity.TaskCategoryBean;
 
 /**
@@ -27,18 +28,19 @@ public class TaskDeleteResultServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// リクエストのエンコーディング方式を指定
 		request.setCharacterEncoding("UTF-8");
-		TaskCategoryDAO dao = new TaskCategoryDAO();
+		DeleteDAO deletedao = new DeleteDAO();
+		TaskDetailDAO detaildao = new TaskDetailDAO();
 		int processingNumber = 0; //処理件数
 		TaskCategoryBean taskDetail = null; // taskDetail の初期化
 
 		try {
 			// 削除処理
 			int taskId = Integer.parseInt(request.getParameter("taskId"));
-			processingNumber = dao.deleteTask(taskId);
+			processingNumber = deletedao.deleteTask(taskId);
 
 			// 削除処理が成功した場合、削除されたタスクの詳細情報を取得
 			if (processingNumber > 0) {
-				taskDetail = dao.selectTask(taskId);
+				taskDetail = detaildao.selectTask(taskId);
 			}
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();

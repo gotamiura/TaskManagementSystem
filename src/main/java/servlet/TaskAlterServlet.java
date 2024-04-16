@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.dao.TaskCategoryDAO;
+import model.dao.TaskListDAO;
 import model.dao.taskDAO;
 import model.entity.CategoryBean;
 import model.entity.TaskCategoryBean;
@@ -30,7 +30,7 @@ public class TaskAlterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		TaskCategoryDAO dao = new TaskCategoryDAO();
+		TaskListDAO dao = new TaskListDAO();
 		try {
 			int taskId =Integer.parseInt(request.getParameter("task_id"));
 			TaskCategoryBean task = dao.selectTask(taskId);
