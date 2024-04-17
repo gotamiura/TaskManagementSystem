@@ -36,6 +36,7 @@ public class TaskAlterServlet extends HttpServlet {
 			int taskId =Integer.parseInt(request.getParameter("task_id"));
 			TaskCategoryBean task = dao.selectTask(taskId);
 			HttpSession session = request.getSession();
+			session.setAttribute("TaskId", taskId);
 			session.setAttribute("TaskDetail", task);
 			
 			taskDAO taskdao = new taskDAO();
@@ -62,30 +63,43 @@ public class TaskAlterServlet extends HttpServlet {
 		// セッションオブジェクトの取得
 		HttpSession session = request.getSession();
 		// 使用するクラスのインスタンス化
-		UpdateDAO dao = new UpdateDAO();
+		UpdateDAO updateDao = new UpdateDAO();
+		
 		TaskCategoryBean updateItem = new TaskCategoryBean();
-		updateItem.setStatusName(request.getParameter("taskName"));
-		updateItem.setCategoryName(request.getParameter("categoryCode"));
-		updateItem.setLimitDate(Date.valueOf(request.getParameter("deadLine")));
-		updateItem.setUserName(request.getParameter("personIncharge"));
-		updateItem.setStatusName(request.getParameter("statusCode"));
-		updateItem.setMemo(request.getParameter("memo"));
-		String url ="";
-	
+		
 		int count = 0;
 		try {
-			count = dao.updateTask(updateItem);
+			int categoryId = updateDao.getCategoryId(request.getParameter("categoryName"));
+			String userId = updateDao.getUserId(request.getParameter("userName"));
+			String statusCode = updateDao.getStatusCode(request.getParameter("statusName"));
+			
+			updateItem.setTaskId((int)session.getAttribute("TaskId"));
+			updateItem.setTaskName(request.getParameter("taskName"));
+			updateItem.setCategoryId(categoryId);
+			updateItem.setLimitDate(Date.valueOf(request.getParameter("deadLine")));
+			updateItem.setUserId(userId);
+			updateItem.setStatusCode(statusCode);
+			updateItem.setMemo(request.getParameter("memo"));
+			
+			count = updateDao.updateTask(updateItem);
+			if(count == 0){
+				session.setAttribute("message", "次のデータを変更できませんでした。");
+			}
+			else {
+				session.setAttribute("message", "次のデータを変更しました。");
+			}
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-		if(count != 0) {
-			url = "update-success.jsp";
-		}
-		else {
-			url = "update-failure.jsp";
-		}
-		RequestDispatcher rd = request.getRequestDispatcher(url);
+		session.setAttribute("TaskName", request.getParameter("taskName"));
+		session.setAttribute("CategoryName", request.getParameter("categoryName"));
+		session.setAttribute("LimitDate", Date.valueOf(request.getParameter("deadLine")));
+		session.setAttribute("UserId", request.getParameter("userName"));
+		session.setAttribute("StatusCode", request.getParameter("statusName"));
+		session.setAttribute("memo", request.getParameter("memo"));
+		
+		RequestDispatcher rd = request.getRequestDispatcher("task-alter-result.jsp");
 		rd.forward(request, response);
 			
 	}

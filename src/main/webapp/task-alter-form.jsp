@@ -50,7 +50,7 @@
 		</tr>
 		<tr>
 			<th>ステータス情報</th>
-			<td><select name="categoryName">
+			<td><select name="statusName">
 					<option value="<%=taskList.getStatusCode()%>"><%=taskList.getStatusName()%></option>
 					<%String[] type= {"未着手","着手","完了"};%>
 					<%for (int i = 0; i< type.length; i++){ %>
