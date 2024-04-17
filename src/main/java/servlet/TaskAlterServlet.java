@@ -27,9 +27,6 @@ import model.entity.UserBean;
 @WebServlet("/TaskAlterServlet")
 public class TaskAlterServlet extends HttpServlet {
 
-
-	private Object categoryName;
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -75,16 +72,16 @@ public class TaskAlterServlet extends HttpServlet {
 		TaskCategoryBean updateItem = new TaskCategoryBean();
 	
 		try {
-			int categoryId = updateDao.getCategoryId(request.getParameter("categoryName"));
-			String userId = updateDao.getUserId(request.getParameter("userName"));
-			String statusCode = updateDao.getStatusCode(request.getParameter("statusName"));
+			String categoryName = updateDao.getCategoryName(Integer.parseInt(request.getParameter("categoryName")));
+			String userName = updateDao.getUserName(Integer.parseInt(request.getParameter("userName")));
+			String statusName = updateDao.getStatusName(Integer.parseInt(request.getParameter("statusName")));
 		
 			updateItem.setTaskId((int)session.getAttribute("TaskId"));
 			updateItem.setTaskName(request.getParameter("taskName"));
-			updateItem.setCategoryId(categoryId);
+			updateItem.setCategoryId(Integer.parseInt( request.getParameter("categoryName")));
 			updateItem.setLimitDate(Date.valueOf(request.getParameter("deadLine")));
-			updateItem.setUserId(userId);
-			updateItem.setStatusCode(statusCode);
+			updateItem.setUserId(request.getParameter("userName"));
+			updateItem.setStatusCode(request.getParameter("statusName"));
 			updateItem.setMemo(request.getParameter("memo"));
 			
 			int count = updateDao.updateTask(updateItem);
@@ -98,10 +95,10 @@ public class TaskAlterServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		session.setAttribute("TaskName", request.getParameter("taskName"));
-		session.setAttribute("CategoryName",request.getParameter("categoryName"));
+		session.setAttribute("CategoryName",categoryName);
 		session.setAttribute("LimitDate", Date.valueOf(request.getParameter("deadLine")));
-		session.setAttribute("UserName", request.getParameter("userName"));
-		session.setAttribute("StatusCode", request.getParameter("statusName"));
+		session.setAttribute("UserName", userName);
+		session.setAttribute("StatusCode", statusName);
 		session.setAttribute("memo", request.getParameter("memo"));
 		
 		RequestDispatcher rd = request.getRequestDispatcher("task-alter-result.jsp");

@@ -28,47 +28,37 @@ public class UpdateDAO {
 		return processingNumber;
     	
     }
-    public int getCategoryId(String category_name) throws ClassNotFoundException, SQLException {
-    	int categoryId = 0;
-    	String sql = "SELECT category_id FROM m_category WHERE category_name = category_name";
+    public String getCategoryName(int category_id) throws ClassNotFoundException, SQLException {
+    	String categoryName = null;
+    	String sql = "SELECT category_name FROM m_category WHERE category_id = category_id";
     	try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);){
     		ResultSet res = pstmt.executeQuery();
-    		categoryId = res.getInt("category_id");
+    		categoryName = res.getString("category_name");
     	}
-		return categoryId;
+		return categoryName;
     	
     }
-	public String getUserId(String user_name) throws ClassNotFoundException, SQLException {
-		String userId = null;
-		String sql = "SELECT user_id FROM m_user WHERE user_name = user_name";
+	public String getUserName(int user_id) throws ClassNotFoundException, SQLException {
+		String userName = null;
+		String sql = "SELECT user_name FROM m_user WHERE user_id = user_id";
     	try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);){
     		ResultSet res = pstmt.executeQuery();
-    		userId = res.getString("user_id");
+    		userName = res.getString("user_name");
     	}
-		return userId;
+		return userName;
 	}
-	public String getStatusCode(String status_name) throws ClassNotFoundException, SQLException {
-		String statusCode = null;
-		String sql = "SELECT status_code FROM m_status WHERE status_name = status_name";
+	public String getStatusName(int status_code) throws ClassNotFoundException, SQLException {
+		String statusName = null;
+		String sql = "SELECT status_name FROM m_status WHERE status_code = status_code";
     	try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);){
     		ResultSet res = pstmt.executeQuery();
-    		statusCode = res.getString("status_code");
+    		statusName = res.getString("status_name");
     	}
-		return statusCode;
+		return statusName;
 	}
-	public String getCategoryName(int cId) throws SQLException, ClassNotFoundException {
-		String cName = null;
-		String sql = "SELECT category_name FROM m_category WHERE category_id = cId";
-    	try (Connection con = ConnectionManager.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql);){
-    		ResultSet res = pstmt.executeQuery();
-    		cName = res.getString("category_name");
-    	}
-		return cName;
-		
-	}
+	
 	
 }

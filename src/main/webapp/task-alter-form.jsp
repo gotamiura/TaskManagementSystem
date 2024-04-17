@@ -25,10 +25,10 @@
 		<tr>
 			<th>カテゴリ情報</th>
 			<td><select name="categoryName">
-				<option value ="<%=taskList.getCategoryName()%>"><%=taskList.getCategoryName()%></option>
+				<option value ="<%=taskList.getCategoryId()%>"><%=taskList.getCategoryName()%></option>
 				<%for (CategoryBean category : categorysList){ %>
 						<%if(!category.getCategory_name().equals(taskList.getCategoryName())) {%>
-							<option value="<%=category.getCategory_name()%>"><%=category.getCategory_name()%></option>
+							<option value="<%=category.getCategory_id()%>"><%=category.getCategory_name()%></option>
 						<%} %>
 				<%} %>
 			</select></td>
@@ -40,9 +40,9 @@
 		<tr>
 			<th>担当者情報</th>
 			<td><select name="userName">
-				<option value ="<%=taskList.getUserName() %>"><%=taskList.getUserName() %></option>
+				<option value ="<%=taskList.getUserId() %>"><%=taskList.getUserName() %></option>
 				<%for (UserBean users : userNameList){ %>
-						<%if(!users.getUser_name().equals(taskList.getUserName())) {%>
+						<%if(!users.getUser_id().equals(taskList.getUserName())) {%>
 							<option value="<%=users.getUser_name()%>"><%=users.getUser_name()%></option>
 						<%} %>
 				<%} %>
@@ -52,10 +52,10 @@
 		<tr>
 			<th>ステータス情報</th>
 			<td><select name="statusName">
-					<option value="<%=taskList.getStatusName()%>"><%=taskList.getStatusName()%></option>
+					<option value="<%=taskList.getStatusCode()%>"><%=taskList.getStatusName()%></option>
 				
 					<%for (TMSBean status : statusList){ %>
-						<%if(!status.getStatus_name().equals(taskList.getStatusName())){%>
+						<%if(!status.getStatus_code().equals(taskList.getStatusName())){%>
 							<option value="<%=status.getStatus_name() %>"><%=status.getStatus_name()%></option>
 						<%} %>
 					<%} %>
