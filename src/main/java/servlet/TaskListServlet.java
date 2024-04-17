@@ -24,7 +24,7 @@ public class TaskListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @param HttpServletRequest request, HttpServletResponse response この引数は使用しない
+	 * @param request,response この引数は使用しない
 	 * @throws ServletException, IOException
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

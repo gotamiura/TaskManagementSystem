@@ -7,8 +7,18 @@ import java.sql.SQLException;
 
 import model.entity.TaskCategoryBean;
 
+/**
+ * t-taskテーブルにm_userテーブル、m_categoryテーブル、m_statusテーブルを内部結合したDAOです。
+ * @author goutamiura
+ */
 public class TaskDetailDAO {
 
+	/**
+	 * 指定したタスクIDのレコード１つを返します。
+	 * @param taskId タスクID
+	 * @return 指定した内容のレコード１つ
+	 * @throws SQLException, ClassNotFoundException
+	 */
     public TaskCategoryBean selectTask(int taskId) throws SQLException, ClassNotFoundException {
         TaskCategoryBean taskDetail = null;
 

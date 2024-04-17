@@ -14,14 +14,14 @@ import model.dao.TaskDetailDAO;
 import model.entity.TaskCategoryBean;
 
 /**
- * TaskCategoryDAOを使った業務処理を行うクラスです。
+ * TaskDetailDAOを使った業務処理を行うクラスです。
  * @author goutamiura
  */
 @WebServlet("/TaskDeleteServlet")
 public class TaskDeleteServlet extends HttpServlet {
 
 	/**
-	 * @param HttpServletRequest request, HttpServletResponse response この引数は使用しない
+	 * @param request,response この引数は使用しない
 	 * @throws ServletException, IOException
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
