@@ -34,7 +34,7 @@ table, th, td {
 		</tr>
 		<tr>
 			<th>ステータス名</th>
-			<td><%= session.getAttribute("StatusName")%></td>
+			<td><%= session.getAttribute("StatusCode")%></td>
 		</tr>
 		<tr>
 			<th>メモ</th>

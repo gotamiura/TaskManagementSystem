@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.List, model.entity.TaskBean, model.entity.CategoryBean,model.entity.UserBean
-    ,model.entity.TaskCategoryBean"%>
+    ,model.entity.TaskCategoryBean, model.entity.TMSBean"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +10,7 @@
 <body>
 	<% List<CategoryBean> categorysList = (List<CategoryBean>)session.getAttribute("TaskCategory");%>
 	<% List<UserBean> userNameList = (List<UserBean>)session.getAttribute("PersoninCharge"); %>
+	<% List<TMSBean> statusList = (List<TMSBean>)session.getAttribute("Status"); %>
 	<%
 	TaskCategoryBean taskList = (TaskCategoryBean)session.getAttribute("TaskDetail");
     %>
@@ -24,10 +25,10 @@
 		<tr>
 			<th>カテゴリ情報</th>
 			<td><select name="categoryName">
-				<option value ="<%=taskList.getCategoryId()%>"><%=taskList.getCategoryName()%></option>
+				<option value ="<%=taskList.getCategoryName()%>"><%=taskList.getCategoryName()%></option>
 				<%for (CategoryBean category : categorysList){ %>
 						<%if(!category.getCategory_name().equals(taskList.getCategoryName())) {%>
-							<option value="<%=category.getCategory_id()%>"><%=category.getCategory_name()%></option>
+							<option value="<%=category.getCategory_name()%>"><%=category.getCategory_name()%></option>
 						<%} %>
 				<%} %>
 			</select></td>
@@ -39,10 +40,10 @@
 		<tr>
 			<th>担当者情報</th>
 			<td><select name="userName">
-				<option value ="<%=taskList.getUserId()%>"><%=taskList.getUserName() %></option>
+				<option value ="<%=taskList.getUserName() %>"><%=taskList.getUserName() %></option>
 				<%for (UserBean users : userNameList){ %>
 						<%if(!users.getUser_name().equals(taskList.getUserName())) {%>
-							<option value="<%=users.getUser_id()%>"><%=users.getUser_name()%></option>
+							<option value="<%=users.getUser_name()%>"><%=users.getUser_name()%></option>
 						<%} %>
 				<%} %>
 			</select></td>
@@ -51,11 +52,11 @@
 		<tr>
 			<th>ステータス情報</th>
 			<td><select name="statusName">
-					<option value="<%=taskList.getStatusCode()%>"><%=taskList.getStatusName()%></option>
-					<%String[] type= {"未着手","着手","完了"};%>
-					<%for (int i = 0; i< type.length; i++){ %>
-						<%if(!type[i].equals(taskList.getStatusName())){%>
-							<option value="<%=type[i]%>"><%=type[i]%></option>
+					<option value="<%=taskList.getStatusName()%>"><%=taskList.getStatusName()%></option>
+				
+					<%for (TMSBean status : statusList){ %>
+						<%if(!status.getStatus_name().equals(taskList.getStatusName())){%>
+							<option value="<%=status.getStatus_name() %>"><%=status.getStatus_name()%></option>
 						<%} %>
 					<%} %>
 				</select></td>

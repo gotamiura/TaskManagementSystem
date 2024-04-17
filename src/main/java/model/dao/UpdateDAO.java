@@ -59,5 +59,16 @@ public class UpdateDAO {
     	}
 		return statusCode;
 	}
+	public String getCategoryName(int cId) throws SQLException, ClassNotFoundException {
+		String cName = null;
+		String sql = "SELECT category_name FROM m_category WHERE category_id = cId";
+    	try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);){
+    		ResultSet res = pstmt.executeQuery();
+    		cName = res.getString("category_name");
+    	}
+		return cName;
+		
+	}
 	
 }

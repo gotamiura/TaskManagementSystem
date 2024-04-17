@@ -119,6 +119,26 @@ public class taskDAO {
 		return bean;
 		
 	}
+
+	public List<TMSBean> setStatusName() throws ClassNotFoundException, SQLException {
+		List<TMSBean> statusList = new ArrayList<TMSBean>();
+		
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pstmt = con.prepareStatement("SELECT * FROM m_status")) {
+			ResultSet res = pstmt.executeQuery();
+
+			while (res.next()) {
+				String status_code = res.getString("status_code");
+				String status_name = res.getString("status_name");
+				
+				TMSBean tBean = new TMSBean();	
+				tBean.setStatus_code(status_code);
+				tBean.setStatus_name(status_name);
+				statusList.add(tBean);
+			}
+		}
+		return statusList;
+	}
 }
 
 

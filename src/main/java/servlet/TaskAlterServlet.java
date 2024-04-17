@@ -17,6 +17,7 @@ import model.dao.TaskDetailDAO;
 import model.dao.UpdateDAO;
 import model.dao.taskDAO;
 import model.entity.CategoryBean;
+import model.entity.TMSBean;
 import model.entity.TaskCategoryBean;
 import model.entity.UserBean;
 
@@ -26,6 +27,8 @@ import model.entity.UserBean;
 @WebServlet("/TaskAlterServlet")
 public class TaskAlterServlet extends HttpServlet {
 
+
+	private Object categoryName;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -42,8 +45,11 @@ public class TaskAlterServlet extends HttpServlet {
 			taskDAO taskdao = new taskDAO();
 			List<CategoryBean> category = taskdao.getCategory();
 			List<UserBean> users = taskdao.getUserName();
+			List<TMSBean> status = taskdao.setStatusName();
 			session.setAttribute("TaskCategory", category);
 			session.setAttribute("PersoninCharge", users);
+			session.setAttribute("Status", status);
+			
 			
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
@@ -54,6 +60,7 @@ public class TaskAlterServlet extends HttpServlet {
 	}
 
 	/**
+	 * @param cName 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -72,7 +79,7 @@ public class TaskAlterServlet extends HttpServlet {
 			int categoryId = updateDao.getCategoryId(request.getParameter("categoryName"));
 			String userId = updateDao.getUserId(request.getParameter("userName"));
 			String statusCode = updateDao.getStatusCode(request.getParameter("statusName"));
-			
+		
 			updateItem.setTaskId((int)session.getAttribute("TaskId"));
 			updateItem.setTaskName(request.getParameter("taskName"));
 			updateItem.setCategoryId(categoryId);
@@ -89,13 +96,12 @@ public class TaskAlterServlet extends HttpServlet {
 				session.setAttribute("message", "次のデータを変更しました。");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 		session.setAttribute("TaskName", request.getParameter("taskName"));
-		session.setAttribute("CategoryName", request.getParameter("categoryName"));
+		session.setAttribute("CategoryName",request.getParameter("categoryName"));
 		session.setAttribute("LimitDate", Date.valueOf(request.getParameter("deadLine")));
-		session.setAttribute("UserId", request.getParameter("userName"));
+		session.setAttribute("UserName", request.getParameter("userName"));
 		session.setAttribute("StatusCode", request.getParameter("statusName"));
 		session.setAttribute("memo", request.getParameter("memo"));
 		
