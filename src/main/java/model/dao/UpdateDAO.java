@@ -28,9 +28,9 @@ public class UpdateDAO {
 		return processingNumber;
     	
     }
-    public int getCategoryId(String cName) throws ClassNotFoundException, SQLException {
+    public int getCategoryId(String category_name) throws ClassNotFoundException, SQLException {
     	int categoryId = 0;
-    	String sql = "SELECT category_id FROM m_category WHERE category_name = cName";
+    	String sql = "SELECT category_id FROM m_category WHERE category_name = category_name";
     	try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);){
     		ResultSet res = pstmt.executeQuery();
@@ -39,9 +39,9 @@ public class UpdateDAO {
 		return categoryId;
     	
     }
-	public String getUserId(String uName) throws ClassNotFoundException, SQLException {
+	public String getUserId(String user_name) throws ClassNotFoundException, SQLException {
 		String userId = null;
-		String sql = "SELECT user_id FROM m_user WHERE user_name = uName";
+		String sql = "SELECT user_id FROM m_user WHERE user_name = user_name";
     	try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);){
     		ResultSet res = pstmt.executeQuery();
@@ -49,9 +49,9 @@ public class UpdateDAO {
     	}
 		return userId;
 	}
-	public String getStatusCode(String sName) throws ClassNotFoundException, SQLException {
+	public String getStatusCode(String status_name) throws ClassNotFoundException, SQLException {
 		String statusCode = null;
-		String sql = "SELECT status_code FROM m_status WHERE status_name = sName";
+		String sql = "SELECT status_code FROM m_status WHERE status_name = status_name";
     	try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);){
     		ResultSet res = pstmt.executeQuery();

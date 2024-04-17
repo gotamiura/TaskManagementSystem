@@ -73,8 +73,7 @@ public class TaskAlterServlet extends HttpServlet {
 		UpdateDAO updateDao = new UpdateDAO();
 		
 		TaskCategoryBean updateItem = new TaskCategoryBean();
-		
-		int count = 0;
+	
 		try {
 			int categoryId = updateDao.getCategoryId(request.getParameter("categoryName"));
 			String userId = updateDao.getUserId(request.getParameter("userName"));
@@ -88,7 +87,7 @@ public class TaskAlterServlet extends HttpServlet {
 			updateItem.setStatusCode(statusCode);
 			updateItem.setMemo(request.getParameter("memo"));
 			
-			count = updateDao.updateTask(updateItem);
+			int count = updateDao.updateTask(updateItem);
 			if(count == 0){
 				session.setAttribute("message", "次のデータを変更できませんでした。");
 			}
