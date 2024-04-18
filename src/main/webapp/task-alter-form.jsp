@@ -42,7 +42,7 @@
 			<td><select name="userName">
 				<option value ="<%=taskList.getUserId() %>"><%=taskList.getUserName() %></option>
 				<%for (UserBean users : userNameList){ %>
-						<%if(!users.getUser_id().equals(taskList.getUserName())) {%>
+						<%if(!users.getUser_name().equals(taskList.getUserName())) {%>
 							<option value="<%=users.getUser_name()%>"><%=users.getUser_name()%></option>
 						<%} %>
 				<%} %>
@@ -55,7 +55,7 @@
 					<option value="<%=taskList.getStatusCode()%>"><%=taskList.getStatusName()%></option>
 				
 					<%for (TMSBean status : statusList){ %>
-						<%if(!status.getStatus_code().equals(taskList.getStatusName())){%>
+						<%if(!status.getStatus_name().equals(taskList.getStatusName())){%>
 							<option value="<%=status.getStatus_name() %>"><%=status.getStatus_name()%></option>
 						<%} %>
 					<%} %>
