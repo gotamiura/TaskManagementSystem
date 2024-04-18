@@ -8,9 +8,9 @@
 <title>タスク編集画面</title>
 </head>
 <body>
-	<% List<CategoryBean> categorysList = (List<CategoryBean>)session.getAttribute("TaskCategory");%>
-	<% List<UserBean> userNameList = (List<UserBean>)session.getAttribute("PersoninCharge"); %>
-	<% List<TMSBean> statusList = (List<TMSBean>)session.getAttribute("Status"); %>
+	<% List<CategoryBean> categorysList = (List<CategoryBean>)session.getAttribute("AlterTaskCategory");%>
+	<% List<UserBean> userNameList = (List<UserBean>)session.getAttribute("AlterPersoninCharge"); %>
+	<% List<TMSBean> statusList = (List<TMSBean>)session.getAttribute("AlterStatus"); %>
 	<%
 	TaskCategoryBean taskList = (TaskCategoryBean)session.getAttribute("TaskDetail");
     %>
