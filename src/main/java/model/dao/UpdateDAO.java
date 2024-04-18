@@ -34,7 +34,9 @@ public class UpdateDAO {
     	try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);){
     		ResultSet res = pstmt.executeQuery();
-    		categoryName = res.getString("category_name");
+    		if(res.next()) {
+    			categoryName = res.getString("category_name");
+    		}
     	}
 		return categoryName;
     	
@@ -45,7 +47,9 @@ public class UpdateDAO {
     	try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);){
     		ResultSet res = pstmt.executeQuery();
-    		userName = res.getString("user_name");
+    		if(res.next()) {
+    			userName = res.getString("user_name");
+    		}
     	}
 		return userName;
 	}
@@ -55,7 +59,9 @@ public class UpdateDAO {
     	try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);){
     		ResultSet res = pstmt.executeQuery();
-    		statusName = res.getString("status_name");
+    		if(res.next()) {
+    			statusName = res.getString("status_name");
+    		}
     	}
 		return statusName;
 	}

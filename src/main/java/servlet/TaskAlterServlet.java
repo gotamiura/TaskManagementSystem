@@ -70,11 +70,14 @@ public class TaskAlterServlet extends HttpServlet {
 		UpdateDAO updateDao = new UpdateDAO();
 		
 		TaskCategoryBean updateItem = new TaskCategoryBean();
-	
+		
+		String categoryName = null;
+		String userName = null;
+		String statusName = null;
 		try {
-			String categoryName = updateDao.getCategoryName(Integer.parseInt(request.getParameter("categoryName")));
-			String userName = updateDao.getUserName(Integer.parseInt(request.getParameter("userName")));
-			String statusName = updateDao.getStatusName(Integer.parseInt(request.getParameter("statusName")));
+			categoryName = updateDao.getCategoryName(Integer.parseInt(request.getParameter("categoryName")));
+			userName = updateDao.getUserName(Integer.parseInt(request.getParameter("userName")));
+			statusName = updateDao.getStatusName(Integer.parseInt(request.getParameter("statusName")));
 		
 			updateItem.setTaskId((int)session.getAttribute("TaskId"));
 			updateItem.setTaskName(request.getParameter("taskName"));
