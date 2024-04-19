@@ -44,12 +44,12 @@ public class UpdateDAO {
 
 	}
 
-	public String getUserName(int user_id) throws ClassNotFoundException, SQLException {
+	public String getUserName(String user_id) throws ClassNotFoundException, SQLException {
 		String userName = null;
 		String sql = "SELECT user_name FROM m_user WHERE user_id = ?";
 		try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);) {
-			pstmt.setInt(1, user_id);
+			pstmt.setString(1, user_id);
 			ResultSet res = pstmt.executeQuery();
 			if (res.next()) {
 				userName = res.getString("user_name");

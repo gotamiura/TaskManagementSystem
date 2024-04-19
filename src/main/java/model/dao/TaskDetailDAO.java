@@ -24,7 +24,7 @@ public class TaskDetailDAO {
 
         try (Connection con = ConnectionManager.getConnection();
              PreparedStatement pstmt = con.prepareStatement(
-                     "SELECT t1.task_id, t1.task_name, t2.category_name, t1.limit_date, t3.user_name, t4.status_name, t1.memo " +
+                     "SELECT t1.task_id, t1.task_name,t1.category_id, t2.category_name, t1.limit_date,t1.user_id, t3.user_name, t1.status_code, t4.status_name, t1.memo " +
                      "FROM task_db.t_task t1 " +
                      "LEFT JOIN task_db.m_category t2 ON t1.category_id = t2.category_id " +
                      "LEFT JOIN task_db.m_user t3 ON t1.user_id = t3.user_id " +
@@ -36,9 +36,12 @@ public class TaskDetailDAO {
                     taskDetail = new TaskCategoryBean();
                     taskDetail.setTaskId(res.getInt("task_id"));
                     taskDetail.setTaskName(res.getString("task_name"));
+                    taskDetail.setCategoryId(res.getInt("category_id"));
                     taskDetail.setCategoryName(res.getString("category_name"));
                     taskDetail.setLimitDate(res.getDate("limit_date"));
+                    taskDetail.setUserId(res.getString("user_id"));
                     taskDetail.setUserName(res.getString("user_name"));
+                    taskDetail.setStatusCode(res.getString("status_code"));
                     taskDetail.setStatusName(res.getString("status_name"));
                     taskDetail.setMemo(res.getString("memo"));
                 }

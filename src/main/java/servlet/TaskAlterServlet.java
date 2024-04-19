@@ -92,7 +92,7 @@ public class TaskAlterServlet extends HttpServlet {
 				session.setAttribute("message", "次のデータを変更しました。");
 			}
 			categoryName = updateDao.getCategoryName(Integer.parseInt(request.getParameter("categoryName")));
-			userName = updateDao.getUserName(Integer.parseInt(request.getParameter("userName")));
+			userName = updateDao.getUserName(request.getParameter("userName"));
 			statusName = updateDao.getStatusName(request.getParameter("statusName"));
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
