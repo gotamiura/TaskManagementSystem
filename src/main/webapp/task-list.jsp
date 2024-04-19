@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="java.util.List, model.entity.TaskCategoryBean, java.time.format.DateTimeFormatter"%>
+	import="java.util.List, model.entity.TaskCategoryBean, java.time.format.DateTimeFormatter,java.sql.Date"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +11,6 @@
 	display: inline-block;
 	margin-right: 5px;
 }
-
 </style>
 </head>
 <body>
@@ -37,18 +36,35 @@
 		<tr>
 			<td><%=task.getTaskName()%></td>
 			<td><%=task.getCategoryName()%></td>
-			<td><%=task.getLimitDate()%></td>
+
+			<td>
+				<%
+				Date limitDate = task.getLimitDate();
+				if (limitDate != null) {
+				%> <%=limitDate.toString()%> 
+				<%
+				} else { 
+				%> 
+				<%
+				String str = "";
+				%>
+				<%
+ 				}
+				%>
+			</td>
+
+
 			<td><%=task.getUserName()%></td>
 			<td><%=task.getStatusName()%></td>
 			<td><%=task.getMemo()%></td>
-			
+
 			<td class="action-buttons">
 				<form action="TaskAlterServlet" method="GET">
 					<input type="hidden" name="task_id" value="<%=task.getTaskId()%>">
 					<input type="submit" value="変更">
 				</form>
 			</td>
-			
+
 			<td class="action-buttons">
 				<form action="TaskDeleteServlet" method="POST">
 					<input type="hidden" name="taskId" value="<%=task.getTaskId()%>">
