@@ -1,6 +1,7 @@
 package model.entity;
 
 import java.sql.Date;
+import java.util.Objects;
 
 /**
  * タスク一覧情報をサーブレットに送るためのBeanです。
@@ -142,6 +143,26 @@ public class TaskCategoryBean {
 	 */
 	public void setMemo(String memo) {
 		this.memo = memo;
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(categoryId, categoryName, limitDate, memo, statusCode, statusName, taskId, taskName, userId,
+				userName);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TaskCategoryBean other = (TaskCategoryBean) obj;
+		return categoryId == other.categoryId && Objects.equals(categoryName, other.categoryName)
+				&& Objects.equals(limitDate, other.limitDate) && Objects.equals(memo, other.memo)
+				&& Objects.equals(statusCode, other.statusCode) && Objects.equals(statusName, other.statusName)
+				&& taskId == other.taskId && Objects.equals(taskName, other.taskName)
+				&& Objects.equals(userId, other.userId) && Objects.equals(userName, other.userName);
 	}
 	
 	

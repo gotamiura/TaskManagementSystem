@@ -75,25 +75,29 @@ public class TaskAlterServlet extends HttpServlet {
 		String userName = null;
 		String statusName = null;
 		try {
-		
+			categoryName = updateDao.getCategoryName(Integer.parseInt(request.getParameter("categoryName")));
+			userName = updateDao.getUserName(request.getParameter("userName"));
+			statusName = updateDao.getStatusName(request.getParameter("statusName"));
+			
 			updateItem.setTaskId((int)session.getAttribute("TaskId"));
 			updateItem.setTaskName(request.getParameter("taskName"));
 			updateItem.setCategoryId(Integer.parseInt( request.getParameter("categoryName")));
+			updateItem.setCategoryName(categoryName);
 			updateItem.setLimitDate(Date.valueOf(request.getParameter("deadLine")));
 			updateItem.setUserId(request.getParameter("userName"));
+			updateItem.setUserName(userName);
 			updateItem.setStatusCode(request.getParameter("statusName"));
+			updateItem.setStatusName(statusName);
 			updateItem.setMemo(request.getParameter("memo"));
-			
+			TaskCategoryBean taskList = (TaskCategoryBean)session.getAttribute("TaskDetail");
 			int count = updateDao.updateTask(updateItem);
-			if(count == 0){
+			if(count ==0 || updateItem.equals(taskList)) {
 				session.setAttribute("message", "次のデータを変更できませんでした。");
 			}
 			else {
 				session.setAttribute("message", "次のデータを変更しました。");
 			}
-			categoryName = updateDao.getCategoryName(Integer.parseInt(request.getParameter("categoryName")));
-			userName = updateDao.getUserName(request.getParameter("userName"));
-			statusName = updateDao.getStatusName(request.getParameter("statusName"));
+			
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
