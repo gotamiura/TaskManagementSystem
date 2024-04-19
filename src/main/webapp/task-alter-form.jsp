@@ -6,6 +6,21 @@
 <head>
 <meta charset="UTF-8">
 <title>タスク編集画面</title>
+<script>
+	function setMinDate() {
+		var today = new Date();
+		var year = today.getFullYear();
+		var month = ('0' + (today.getMonth() + 1)).slice(-2); // 月を2桁にする
+		var day = ('0' + today.getDate()).slice(-2); // 日を2桁にする
+		var minDate = year + '-' + month + '-' + day;
+
+		document.getElementById('deadLine').setAttribute('min', minDate);
+	}
+	// ページ読み込み時に実行
+	window.onload = function() {
+		setMinDate();
+	};
+</script>
 </head>
 <body>
 	<% List<CategoryBean> categorysList = (List<CategoryBean>)session.getAttribute("AlterTaskCategory");%>
@@ -35,7 +50,7 @@
 		</tr>
 		<tr>
 			<th>期限</th>
-			<td><input type="date" name="deadLine" value = "<%=taskList.getLimitDate() %>"></td>
+			<td><input type="date" name="deadLine" value = "<%=taskList.getLimitDate() %>" id = "deadLine"></td>
 		</tr>
 		<tr>
 			<th>担当者情報</th>
