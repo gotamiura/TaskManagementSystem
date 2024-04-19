@@ -39,15 +39,8 @@
 
 			<td>
 				<%
-				Date limitDate = task.getLimitDate();
-				if (limitDate != null) {
-				%> <%=limitDate.toString()%> 
-				<%
-				} else { 
-				%> 
-				<%
-				String str = "";
-				%>
+				if (task.getLimitDate() != null) {
+				%> <%=task.getLimitDate()%> 
 				<%
  				}
 				%>
