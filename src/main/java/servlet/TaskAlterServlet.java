@@ -80,10 +80,19 @@ public class TaskAlterServlet extends HttpServlet {
 		String userName = null;
 		String statusName = null;
 		int count = 0;
+		
 		updateItem.setTaskId((int) session.getAttribute("TaskId"));
 		updateItem.setTaskName(request.getParameter("taskName"));
 		updateItem.setCategoryId(Integer.parseInt(request.getParameter("categoryName")));
-		updateItem.setLimitDate(Date.valueOf(request.getParameter("deadLine")));
+		
+		String deadlineParam = request.getParameter("deadLine");
+		Date defaultDate = null;
+		if (deadlineParam != null && !deadlineParam.isEmpty()) {
+			defaultDate = Date.valueOf(request.getParameter("deadLine"));
+		    updateItem.setLimitDate(defaultDate);    
+		}
+		String formattedDate = (defaultDate != null) ? defaultDate.toString() : " ";
+		
 		updateItem.setUserId(request.getParameter("userName"));
 		updateItem.setStatusCode(request.getParameter("statusName"));
 		updateItem.setMemo(request.getParameter("memo"));
@@ -103,7 +112,7 @@ public class TaskAlterServlet extends HttpServlet {
 		}
 		session.setAttribute("TaskName", request.getParameter("taskName"));
 		session.setAttribute("CategoryName", categoryName);
-		session.setAttribute("LimitDate", Date.valueOf(request.getParameter("deadLine")));
+		session.setAttribute("LimitDate", formattedDate);
 		session.setAttribute("UserName", userName);
 		session.setAttribute("StatusCode", statusName);
 		session.setAttribute("memo", request.getParameter("memo"));

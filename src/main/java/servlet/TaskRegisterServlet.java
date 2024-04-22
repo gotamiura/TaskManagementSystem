@@ -61,11 +61,18 @@ public class TaskRegisterServlet extends HttpServlet {
 		taskBean.setMemo(memo);
 		
 		int categoryCode = Integer.parseInt(request.getParameter("categoryCode"));
-		Date deadLine = Date.valueOf(request.getParameter("deadLine"));
 		String statusCode = request.getParameter("statusCode");
 		
+		
+		String deadline= request.getParameter("deadLine");
+		Date defaultDate = null;
+		if (deadline != null && !deadline.isEmpty()) {
+			defaultDate = Date.valueOf(request.getParameter("deadLine"));
+			taskBean.setLimitDate(defaultDate);    
+		}
+		
 		taskBean.setCategoryId(categoryCode);
-		taskBean.setLimitDate(deadLine);
+		taskBean.setLimitDate(defaultDate);
 		taskBean.setStatusCode(statusCode);
 
 		int count = 0;
