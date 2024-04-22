@@ -3,103 +3,103 @@ package model.entity;
 import java.sql.Date;
 
 public class TMSBean {
-	private int task_id;
-	private String task_name;
-	private int category_id;
-	private Date limit_date;
-	private String user_id;
-	private String status_code;
+	private int taskId;
+	private String taskName;
+	private int categoryId;
+	private Date limitDate;
+	private String userId;
+	private String statusCode;
 	private String memo;
 	
-	private String category_name;
+	private String categoryName;
 	
 	private String password;
-	private String user_name;
+	private String userName;
 	
-	private String status_name;
+	private String statusName;
 
 	/**
-	 * @return task_id
+	 * @return taskId
 	 */
-	public int getTask_id() {
-		return task_id;
+	public int getTaskId() {
+		return taskId;
 	}
 
 	/**
-	 * @param task_id セットする task_id
+	 * @param taskId セットする taskId
 	 */
-	public void setTask_id(int task_id) {
-		this.task_id = task_id;
+	public void setTaskId(int taskId) {
+		this.taskId = taskId;
 	}
 
 	/**
-	 * @return task_name
+	 * @return taskName
 	 */
-	public String getTask_name() {
-		return task_name;
+	public String getTaskName() {
+		return taskName;
 	}
 
 	/**
-	 * @param task_name セットする task_name
+	 * @param taskName セットする taskName
 	 */
-	public void setTask_name(String task_name) {
-		this.task_name = task_name;
+	public void setTaskName(String taskName) {
+		this.taskName = taskName;
 	}
 
 	/**
-	 * @return category_id
+	 * @return categoryId
 	 */
-	public int getCategory_id() {
-		return category_id;
+	public int getCategoryId() {
+		return categoryId;
 	}
 
 	/**
-	 * @param category_id セットする category_id
+	 * @param categoryId セットする categoryId
 	 */
-	public void setCategory_id(int category_id) {
-		this.category_id = category_id;
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	/**
-	 * @return limit_date
+	 * @return limitDate
 	 */
-	public Date getLimit_date() {
-		return limit_date;
+	public Date getLimitDate() {
+		return limitDate;
 	}
 
 	/**
-	 * @param limit_date セットする limit_date
+	 * @param limitDate セットする limitDate
 	 */
-	public void setLimit_date(Date limit_date) {
-		this.limit_date = limit_date;
+	public void setLimitDate(Date limitDate) {
+		this.limitDate = limitDate;
 	}
 
 	/**
-	 * @return user_id
+	 * @return userId
 	 */
-	public String getUser_id() {
-		return user_id;
+	public String getUserId() {
+		return userId;
 	}
 
 	/**
-	 * @param user_id セットする user_id
+	 * @param userId セットする userId
 	 */
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	/**
-	 * @return status_code
+	 * @return statusCode
 	 */
-	public String getStatus_code() {
-		return status_code;
+	public String getStatusCode() {
+		return statusCode;
 	}
 
 	/**
-	 * @param status_code セットする status_code
+	 * @param statusCode セットする statusCode
 	 */
-	public void setStatus_code(String status_code) {
-		this.status_code = status_code;
+	public void setStatusCode(String statusCode) {
+		this.statusCode = statusCode;
 	}
 
 	/**
@@ -117,17 +117,17 @@ public class TMSBean {
 	}
 
 	/**
-	 * @return category_name
+	 * @return categoryName
 	 */
-	public String getCategory_name() {
-		return category_name;
+	public String getCategoryName() {
+		return categoryName;
 	}
 
 	/**
-	 * @param category_name セットする category_name
+	 * @param categoryName セットする categoryName
 	 */
-	public void setCategory_name(String category_name) {
-		this.category_name = category_name;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 	/**
@@ -145,30 +145,33 @@ public class TMSBean {
 	}
 
 	/**
-	 * @return user_name
+	 * @return userName
 	 */
-	public String getUser_name() {
-		return user_name;
+	public String getUserName() {
+		return userName;
 	}
 
 	/**
-	 * @param user_name セットする user_name
+	 * @param userName セットする userName
 	 */
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	/**
-	 * @return status_name
+	 * @return statusName
 	 */
-	public String getStatus_name() {
-		return status_name;
+	public String getStatusName() {
+		return statusName;
 	}
 
 	/**
-	 * @param status_name セットする status_name
+	 * @param statusName セットする statusName
 	 */
-	public void setStatus_name(String status_name) {
-		this.status_name = status_name;
+	public void setStatusName(String statusName) {
+		this.statusName = statusName;
 	}
+
+	
+	
 }

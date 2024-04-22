@@ -3,21 +3,21 @@ package model.entity;
 import java.sql.Timestamp;
 
 public class UserBean {
-	private String user_id;
+	private String userId;
 	private String password;
-	private String user_name;
-	private Timestamp update_datetime;
+	private String userName;
+	private Timestamp updateDatetime;
 	/**
-	 * @return user_id
+	 * @return userId
 	 */
-	public String getUser_id() {
-		return user_id;
+	public String getUserId() {
+		return userId;
 	}
 	/**
-	 * @param user_id セットする user_id
+	 * @param userId セットする userId
 	 */
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	/**
 	 * @return password
@@ -32,28 +32,28 @@ public class UserBean {
 		this.password = password;
 	}
 	/**
-	 * @return user_name
+	 * @return userName
 	 */
-	public String getUser_name() {
-		return user_name;
+	public String getUserName() {
+		return userName;
 	}
 	/**
-	 * @param user_name セットする user_name
+	 * @param userName セットする userName
 	 */
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	/**
-	 * @return update_datetime
+	 * @return updateDatetime
 	 */
-	public Timestamp getUpdate_datetime() {
-		return update_datetime;
+	public Timestamp getUpdateDatetime() {
+		return updateDatetime;
 	}
 	/**
-	 * @param update_datetime セットする update_datetime
+	 * @param updateDatetime セットする updateDatetime
 	 */
-	public void setUpdate_datetime(Timestamp update_datetime) {
-		this.update_datetime = update_datetime;
+	public void setUpdateDatetime(Timestamp updateDatetime) {
+		this.updateDatetime = updateDatetime;
 	}
 	
 }

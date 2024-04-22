@@ -28,15 +28,18 @@ public class TaskRegisterServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		taskDAO dao = new taskDAO();
+		List<CategoryBean> category = null;
+		List<UserBean> users = null;
 		try {
-			List<CategoryBean> category = dao.getCategory();
-			List<UserBean> users = dao.getUserName();
-			HttpSession session = request.getSession();
-			session.setAttribute("TaskCategory", category);
-			session.setAttribute("PersoninCharge", users);
+			category = dao.getCategory();
+			users = dao.getUserName();
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
+		HttpSession session = request.getSession();
+		session.setAttribute("TaskCategory", category);
+		session.setAttribute("PersoninCharge", users);
+		
 		RequestDispatcher rd = request.getRequestDispatcher("task-register.jsp");
 		rd.forward(request, response);
 	}
@@ -53,8 +56,8 @@ public class TaskRegisterServlet extends HttpServlet {
 		String memo = request.getParameter("memo");
 		// Beanのインスタンス化
 		TaskBean taskBean = new TaskBean();
-		taskBean.setTask_name(taskName);
-		taskBean.setUser_id(userName);
+		taskBean.setTaskName(taskName);
+		taskBean.setUserId(userName);
 		taskBean.setMemo(memo);
 		
 		try {
@@ -63,9 +66,9 @@ public class TaskRegisterServlet extends HttpServlet {
 			Date deadLine = Date.valueOf(request.getParameter("deadLine"));
 			String statusCode = request.getParameter("statusCode");
 			
-			taskBean.setCategory_id(categoryCode);
-			taskBean.setLimit_date(deadLine);
-			taskBean.setStatus_code(statusCode);
+			taskBean.setCategoryId(categoryCode);
+			taskBean.setLimitDate(deadLine);
+			taskBean.setStatusCode(statusCode);
 
 			int count = dao.insert(taskBean);// 登録処理
 			if (count != 0) {

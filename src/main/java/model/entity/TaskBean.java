@@ -4,86 +4,86 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 public class TaskBean {
-	private int task_id;
-	private String task_name;
-	private int category_id;
-	private Date limit_date;
-	private String user_id;
-	private String status_code;
+	private int taskId;
+	private String taskName;
+	private int categoryId;
+	private Date limitDate;
+	private String userId;
+	private String statusCode;
 	private String memo;
-	private Timestamp create_datetime;
-	private Timestamp update_datetime;
+	private Timestamp createDatetime;
+	private Timestamp updateDatetime;
 	/**
-	 * @return task_id
+	 * @return taskId
 	 */
-	public int getTask_id() {
-		return task_id;
+	public int getTaskId() {
+		return taskId;
 	}
 	/**
-	 * @param task_id セットする task_id
+	 * @param taskId セットする taskId
 	 */
-	public void setTask_id(int task_id) {
-		this.task_id = task_id;
+	public void setTaskId(int taskId) {
+		this.taskId = taskId;
 	}
 	/**
-	 * @return task_name
+	 * @return taskName
 	 */
-	public String getTask_name() {
-		return task_name;
+	public String getTaskName() {
+		return taskName;
 	}
 	/**
-	 * @param task_name セットする task_name
+	 * @param taskName セットする taskName
 	 */
-	public void setTask_name(String task_name) {
-		this.task_name = task_name;
+	public void setTaskName(String taskName) {
+		this.taskName = taskName;
 	}
 	/**
-	 * @return category_id
+	 * @return categoryId
 	 */
-	public int getCategory_id() {
-		return category_id;
+	public int getCategoryId() {
+		return categoryId;
 	}
 	/**
-	 * @param category_id セットする category_id
+	 * @param categoryId セットする categoryId
 	 */
-	public void setCategory_id(int category_id) {
-		this.category_id = category_id;
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
 	}
 	/**
-	 * @return limit_date
+	 * @return limitDate
 	 */
-	public Date getLimit_date() {
-		return limit_date;
+	public Date getLimitDate() {
+		return limitDate;
 	}
 	/**
-	 * @param limit_date セットする limit_date
+	 * @param limitDate セットする limitDate
 	 */
-	public void setLimit_date(Date limit_date) {
-		this.limit_date = limit_date;
+	public void setLimitDate(Date limitDate) {
+		this.limitDate = limitDate;
 	}
 	/**
-	 * @return user_id
+	 * @return userId
 	 */
-	public String getUser_id() {
-		return user_id;
+	public String getUserId() {
+		return userId;
 	}
 	/**
-	 * @param user_id セットする user_id
+	 * @param userId セットする userId
 	 */
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	/**
-	 * @return status_code
+	 * @return statusCode
 	 */
-	public String getStatus_code() {
-		return status_code;
+	public String getStatusCode() {
+		return statusCode;
 	}
 	/**
-	 * @param status_code セットする status_code
+	 * @param statusCode セットする statusCode
 	 */
-	public void setStatus_code(String status_code) {
-		this.status_code = status_code;
+	public void setStatusCode(String statusCode) {
+		this.statusCode = statusCode;
 	}
 	/**
 	 * @return memo
@@ -98,27 +98,28 @@ public class TaskBean {
 		this.memo = memo;
 	}
 	/**
-	 * @return create_datetime
+	 * @return createDatetime
 	 */
-	public Timestamp getCreate_datetime() {
-		return create_datetime;
+	public Timestamp getCreateDatetime() {
+		return createDatetime;
 	}
 	/**
-	 * @param create_datetime セットする create_datetime
+	 * @param createDatetime セットする createDatetime
 	 */
-	public void setCreate_datetime(Timestamp create_datetime) {
-		this.create_datetime = create_datetime;
+	public void setCreateDatetime(Timestamp createDatetime) {
+		this.createDatetime = createDatetime;
 	}
 	/**
-	 * @return update_datetime
+	 * @return updateDatetime
 	 */
-	public Timestamp getUpdate_datetime() {
-		return update_datetime;
+	public Timestamp getUpdateDatetime() {
+		return updateDatetime;
 	}
 	/**
-	 * @param update_datetime セットする update_datetime
+	 * @param updateDatetime セットする updateDatetime
 	 */
-	public void setUpdate_datetime(Timestamp update_datetime) {
-		this.update_datetime = update_datetime;
-	}	
+	public void setUpdateDatetime(Timestamp updateDatetime) {
+		this.updateDatetime = updateDatetime;
+	}
+	
 }

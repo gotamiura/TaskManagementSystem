@@ -32,8 +32,8 @@ public class taskDAO {
 				String category_name = res.getString("category_name");
 				
 				CategoryBean categoryBean = new CategoryBean();	
-				categoryBean.setCategory_id(category_id);
-				categoryBean .setCategory_name(category_name);
+				categoryBean.setCategoryId(category_id);
+				categoryBean .setCategoryName(category_name);
 
 				categoryList.add(categoryBean);
 			}
@@ -55,11 +55,11 @@ public class taskDAO {
 		try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement pstmt = con.prepareStatement("INSERT INTO t_task(task_name,category_id, limit_date,user_id,status_code,memo) VALUES (?, ?, ?, ?, ?,?)")) {
 				
-				pstmt.setString(1,taskBean.getTask_name());
-				pstmt.setInt(2,taskBean.getCategory_id());
-				pstmt.setDate(3,taskBean.getLimit_date());
-				pstmt.setString(4,taskBean.getUser_id());
-				pstmt.setString(5, taskBean.getStatus_code());
+				pstmt.setString(1,taskBean.getTaskName());
+				pstmt.setInt(2,taskBean.getCategoryId());
+				pstmt.setDate(3,taskBean.getLimitDate());
+				pstmt.setString(4,taskBean.getUserId());
+				pstmt.setString(5, taskBean.getStatusCode());
 				pstmt.setString(6,taskBean.getMemo());
 				
 				count = pstmt.executeUpdate();
@@ -88,8 +88,8 @@ public class taskDAO {
 				String user_name = res.getString("user_name");
 				
 				UserBean userBean = new UserBean();	
-				userBean.setUser_id(user_id);
-				userBean .setUser_name(user_name);
+				userBean.setUserId(user_id);
+				userBean .setUserName(user_name);
 				userList.add(userBean);
 			}
 		}
@@ -108,11 +108,11 @@ public class taskDAO {
 				//List<TMSBean> taskList = new ArrayList<TMSBean>();
 				
 				bean = new TMSBean();	
-				bean.setTask_name(res.getString("task_name"));
-				bean.setCategory_name(res.getString("category_name"));
-				bean.setLimit_date(res.getDate("limt_date"));
-				bean.setUser_name(res.getString("user_name"));
-				bean.setStatus_name(res.getString("status_name"));
+				bean.setTaskName(res.getString("task_name"));
+				bean.setCategoryName(res.getString("category_name"));
+				bean.setLimitDate(res.getDate("limt_date"));
+				bean.setUserName(res.getString("user_name"));
+				bean.setStatusName(res.getString("status_name"));
 				bean.setMemo(res.getString("memo"));
 			}
 		}
@@ -132,8 +132,8 @@ public class taskDAO {
 				String status_name = res.getString("status_name");
 				
 				TMSBean tBean = new TMSBean();	
-				tBean.setStatus_code(status_code);
-				tBean.setStatus_name(status_name);
+				tBean.setStatusCode(status_code);
+				tBean.setStatusName(status_name);
 				statusList.add(tBean);
 			}
 		}
