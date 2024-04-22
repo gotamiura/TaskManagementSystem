@@ -80,11 +80,20 @@ public class TaskAlterServlet extends HttpServlet {
 		String userName = null;
 		String statusName = null;
 		int count = 0;
+		try {
+			categoryName = updateDao.getCategoryName(Integer.parseInt(request.getParameter("categoryName")));
+			userName = updateDao.getUserName(request.getParameter("userName"));
+			statusName = updateDao.getStatusName(request.getParameter("statusName"));
+		} catch (NumberFormatException | ClassNotFoundException | SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		
 		
 		updateItem.setTaskId((int) session.getAttribute("TaskId"));
 		updateItem.setTaskName(request.getParameter("taskName"));
 		updateItem.setCategoryId(Integer.parseInt(request.getParameter("categoryName")));
-		
+		updateItem.setCategoryName(categoryName);
 		String deadlineParam = request.getParameter("deadLine");
 		Date defaultDate = null;
 		if (deadlineParam != null && !deadlineParam.isEmpty()) {
@@ -94,14 +103,17 @@ public class TaskAlterServlet extends HttpServlet {
 		String formattedDate = (defaultDate != null) ? defaultDate.toString() : " ";
 		
 		updateItem.setUserId(request.getParameter("userName"));
+		updateItem.setUserName(userName);
 		updateItem.setStatusCode(request.getParameter("statusName"));
+		updateItem.setStatusName(statusName);
 		updateItem.setMemo(request.getParameter("memo"));
 
 		try {
-			count = updateDao.updateTask(updateItem);
-			categoryName = updateDao.getCategoryName(Integer.parseInt(request.getParameter("categoryName")));
-			userName = updateDao.getUserName(request.getParameter("userName"));
-			statusName = updateDao.getStatusName(request.getParameter("statusName"));
+			TaskCategoryBean taskDetail = (TaskCategoryBean)session.getAttribute("TaskDetail");
+			if(!updateItem.equals(taskDetail)) {
+				count = updateDao.updateTask(updateItem);
+			}
+			
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}

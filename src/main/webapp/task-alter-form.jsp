@@ -81,10 +81,8 @@
 			<td><input type="text" name="memo" maxlength= "100" value = "<%=taskList.getMemo() %>"></td>
 		</tr>
 	</table><br>
-	<input type="submit" value="編集実行">
-	</form>
-		
-		
-		
+	<input type="submit" value="編集実行"><br><br>
+	<a href="menu.jsp"> <input type="submit" value="メニュー画面へ"></a>
+	</form>	
 </body>
 </html>
