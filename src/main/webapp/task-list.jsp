@@ -34,8 +34,23 @@
 			for (TaskCategoryBean task : taskList) {
 		%>
 		<tr>
-			<td><%=task.getTaskName()%></td>
-			<td><%=task.getCategoryName()%></td>
+			<td>
+				<%
+				if (task.getTaskName() != null) {
+				%> <%=task.getTaskName()%> 
+				<%
+ 				}
+				%>
+			</td>
+			
+			<td>
+				<%
+				if (task.getCategoryName() != null) {
+				%> <%=task.getCategoryName()%> 
+				<%
+ 				}
+				%>
+			</td>
 
 			<td>
 				<%
@@ -45,12 +60,34 @@
  				}
 				%>
 			</td>
+			
+			<td>
+				<%
+				if (task.getUserName() != null) {
+				%> <%=task.getUserName()%> 
+				<%
+ 				}
+				%>
+			</td>
 
-
-			<td><%=task.getUserName()%></td>
-			<td><%=task.getStatusName()%></td>
-			<td><%=task.getMemo()%></td>
-
+			<td>
+				<%
+				if (task.getStatusName() != null) {
+				%> <%=task.getStatusName()%> 
+				<%
+ 				}
+				%>
+			</td>
+			
+			<td>
+				<%
+				if (task.getMemo() != null) {
+				%> <%=task.getMemo()%> 
+				<%
+ 				}
+				%>
+			</td>
+			
 			<td class="action-buttons">
 				<form action="TaskAlterServlet" method="GET">
 					<input type="hidden" name="task_id" value="<%=task.getTaskId()%>">
