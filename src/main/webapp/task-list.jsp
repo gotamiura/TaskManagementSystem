@@ -101,6 +101,13 @@
 					<input type="submit" value="削除">
 				</form>
 			</td>
+			
+			<td class="action-buttons">
+				<form action="EnterCommentsServlet" method="POST">
+					<input type="hidden" name="taskId" value="<%=task.getTaskId()%>">
+					<input type="submit" value="コメント">
+				</form>
+			</td>
 		</tr>
 		<%
 		}
