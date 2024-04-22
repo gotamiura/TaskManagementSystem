@@ -33,9 +33,12 @@ public class TaskDeleteResultServlet extends HttpServlet {
 		int processingNumber = 0; //処理件数
 		TaskCategoryBean taskDetail = null; // taskDetail の初期化
 
+		//taskIdの取得
+		int taskId = Integer.parseInt(request.getParameter("taskId"));
+
 		try {
+
 			// 削除処理
-			int taskId = Integer.parseInt(request.getParameter("taskId"));
 			processingNumber = deletedao.deleteTask(taskId);
 
 			// 削除処理が成功した場合、削除されたタスクの詳細情報を取得

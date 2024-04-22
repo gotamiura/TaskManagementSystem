@@ -31,24 +31,28 @@ public class TaskDeleteServlet extends HttpServlet {
 
 		// TaskCategoryDAOをインスタンス化
 		TaskDetailDAO dao = new TaskDetailDAO();
+		
+		//taskDetailを初期化
+		TaskCategoryBean taskDetail = null;
 
 		try {
 			// タスクIDを元にタスク詳細を取得
-			TaskCategoryBean taskDetail = dao.selectTask(taskId);
-
-			// セッションを取得または新規作成
-			HttpSession session = request.getSession();
-
-			// タスク詳細をセッションにセット
-			session.setAttribute("taskDetail", taskDetail);
-
-			// 削除確認画面にリダイレクト
-			response.sendRedirect("task-delete-confirm.jsp");
+			taskDetail = dao.selectTask(taskId);
 
 		} catch (SQLException | ClassNotFoundException e) {
 			// エラーハンドリング
 			e.printStackTrace();
 		}
+		
+		// セッションを取得または新規作成
+		HttpSession session = request.getSession();
+
+		// タスク詳細をセッションにセット
+		session.setAttribute("taskDetail", taskDetail);
+
+		// 削除確認画面にリダイレクト
+		response.sendRedirect("task-delete-confirm.jsp");
+
 
 	}
 }
