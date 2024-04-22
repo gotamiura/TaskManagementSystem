@@ -25,7 +25,7 @@ public class TaskCategoryDAO {
 								"LEFT JOIN task_db.m_category t2 ON t1.category_id = t2.category_id " +
 								"LEFT JOIN task_db.m_user t3 ON t1.user_id = t3.user_id " +
 								"LEFT JOIN task_db.m_status t4 ON t1.status_code = t4.status_code " +
-								"ORDER BY user_name")) {
+								"ORDER BY user_name,task_id")) {
 			
 			while (res.next()) {
 				int taskId = res.getInt("task_id");
