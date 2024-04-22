@@ -36,6 +36,17 @@ CREATE TABLE t_task(
         ON UPDATE CURRENT_TIMESTAMP
 );
 
+CREATE TABLE t_comment( 
+    comment_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT
+    , task_id INT NOT NULL
+    , user_id VARCHAR (24) NOT NULL
+    , comment VARCHAR (100) NOT NULL
+    , update_datetime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP 
+        ON UPDATE CURRENT_TIMESTAMP
+        , FOREIGN KEY (task_id) REFERENCES t_task(task_id)
+        , FOREIGN KEY (user_id) REFERENCES m_user(user_id)
+); 
+
 insert into task_db.m_user(user_id,password,user_name,update_datetime) values 
     ('miura','miu','三浦',TIMESTAMP '2024-04-10 16:59:05.000')
   , ('shanmathi','shan','シャンマティ',TIMESTAMP '2024-04-10 16:57:56.000');
