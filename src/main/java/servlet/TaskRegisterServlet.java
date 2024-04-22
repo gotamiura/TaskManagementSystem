@@ -60,25 +60,28 @@ public class TaskRegisterServlet extends HttpServlet {
 		taskBean.setUserId(userName);
 		taskBean.setMemo(memo);
 		
+		int categoryCode = Integer.parseInt(request.getParameter("categoryCode"));
+		Date deadLine = Date.valueOf(request.getParameter("deadLine"));
+		String statusCode = request.getParameter("statusCode");
+		
+		taskBean.setCategoryId(categoryCode);
+		taskBean.setLimitDate(deadLine);
+		taskBean.setStatusCode(statusCode);
+
+		int count = 0;
+		
 		try {
 			
-			int categoryCode = Integer.parseInt(request.getParameter("categoryCode"));
-			Date deadLine = Date.valueOf(request.getParameter("deadLine"));
-			String statusCode = request.getParameter("statusCode");
-			
-			taskBean.setCategoryId(categoryCode);
-			taskBean.setLimitDate(deadLine);
-			taskBean.setStatusCode(statusCode);
-
-			int count = dao.insert(taskBean);// 登録処理
-			if (count != 0) {
-				RequestDispatcher rd = request.getRequestDispatcher("register-success.jsp");// 登録成功画面
-				rd.forward(request, response);
-			}
+			count = dao.insert(taskBean);// 登録処理
 			
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 			RequestDispatcher rd = request.getRequestDispatcher("register-failure.jsp");// 登録失敗画面
+			rd.forward(request, response);
+		}
+		
+		if (count != 0) {
+			RequestDispatcher rd = request.getRequestDispatcher("register-success.jsp");// 登録成功画面
 			rd.forward(request, response);
 		}
 		
