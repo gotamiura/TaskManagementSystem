@@ -43,7 +43,7 @@
 						<%
 						for (CategoryBean categoryName : category) {
 						%>
-						<option value=<%=categoryName.getCategory_id()%>><%=categoryName.getCategory_name()%></option>
+						<option value=<%=categoryName.getCategoryId()%>><%=categoryName.getCategoryName()%></option>
 						<%
 						}
 						%>
@@ -59,7 +59,7 @@
 						<%
 						for (UserBean personIncharge : userName) {
 						%>
-						<option value=<%=personIncharge.getUser_id()%>><%=personIncharge.getUser_name()%></option>
+						<option value=<%=personIncharge.getUserId()%>><%=personIncharge.getUserName()%></option>
 						<%
 						}
 						%>

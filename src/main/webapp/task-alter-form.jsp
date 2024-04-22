@@ -42,8 +42,8 @@
 			<td><select name="categoryName">
 				<option value ="<%=taskList.getCategoryId()%>"><%=taskList.getCategoryName()%></option>
 				<%for (CategoryBean category : categorysList){ %>
-						<%if(!category.getCategory_name().equals(taskList.getCategoryName())) {%>
-							<option value="<%=category.getCategory_id()%>"><%=category.getCategory_name()%></option>
+						<%if(!category.getCategoryName().equals(taskList.getCategoryName())) {%>
+							<option value="<%=category.getCategoryId()%>"><%=category.getCategoryName()%></option>
 						<%} %>
 				<%} %>
 			</select></td>
@@ -57,8 +57,8 @@
 			<td><select name="userName">
 				<option value ="<%=taskList.getUserId() %>"><%=taskList.getUserName() %></option>
 				<%for (UserBean users : userNameList){ %>
-						<%if(!users.getUser_name().equals(taskList.getUserName())) {%>
-							<option value="<%=users.getUser_id()%>"><%=users.getUser_name()%></option>
+						<%if(!users.getUserName().equals(taskList.getUserName())) {%>
+							<option value="<%=users.getUserId()%>"><%=users.getUserName()%></option>
 						<%} %>
 				<%} %>
 			</select></td>
@@ -70,8 +70,8 @@
 					<option value="<%=taskList.getStatusCode()%>"><%=taskList.getStatusName()%></option>
 				
 					<%for (TMSBean status : statusList){ %>
-						<%if(!status.getStatus_name().equals(taskList.getStatusName())){%>
-							<option value="<%=status.getStatus_code() %>"><%=status.getStatus_name()%></option>
+						<%if(!status.getStatusName().equals(taskList.getStatusName())){%>
+							<option value="<%=status.getStatusCode() %>"><%=status.getStatusName()%></option>
 						<%} %>
 					<%} %>
 				</select></td>
