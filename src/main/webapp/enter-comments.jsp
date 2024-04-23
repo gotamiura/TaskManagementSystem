@@ -12,37 +12,37 @@
 	EnterCommentsBean comments = (EnterCommentsBean) session.getAttribute("comments");
 	%>
 	<h1>コメント入力画面</h1>
-	<table border="1">
-		<tr>
-			<th>タスク名</th>
-			<td>
-				<%
-				if (comments.getTaskName() != null) {
-				%> <%=comments.getTaskName()%> <%
- }
- %>
-			</td>
-		</tr>
-		<tr>
-			<th>担当者情報</th>
-			<td>
-				<%
-				if (comments.getUserName() != null) {
-				%> <%=comments.getUserName()%> <%
- }
- %>
-			</td>
-		</tr>
-		<tr>
-			<th>コメント</th>
-			<td><input type="text" name="comments"></td>
-		</tr>
-	</table>
-	<br>
 	<form action="CommentsResultServlet" method="POST">
-		<input type="hidden" name="taskId" value="<%=comments.getTaskId()%>">
-		<input type="hidden" name="userId" value="<%=comments.getUserId()%>">
-		<input type="submit" value="コメントする">
+		<table border="1">
+			<tr>
+				<th>タスク名</th>
+				<td>
+					<%
+					if (comments.getTaskName() != null) {
+					%> <%=comments.getTaskName()%> <%
+ }
+ %>
+				</td>
+			</tr>
+			<tr>
+				<th>担当者情報</th>
+				<td>
+					<%
+					if (comments.getUserName() != null) {
+					%> <%=comments.getUserName()%> <%
+ }
+ %>
+				</td>
+			</tr>
+			<tr>
+				<th>コメント</th>
+				<td><input type="text" name="comments"></td>
+			</tr>
+		</table>
+		<br> <input type="hidden" name="taskId"
+			value="<%=comments.getTaskId()%>"> <input type="hidden"
+			name="userId" value="<%=comments.getUserId()%>"> <input
+			type="submit" value="コメントする">
 	</form>
 	<br>
 

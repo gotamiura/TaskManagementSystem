@@ -23,31 +23,29 @@ public class CommentsResultServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		// リクエストのエンコーディング方式を指定
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		// リクエストからタスクIDを取得
 		EnterCommentsBean comments = (EnterCommentsBean) session.getAttribute("comments");
 		int taskId = comments.getTaskId();
-		String userId = comments.getUserName();
+		String userId = comments.getUserId();
 		String comment = request.getParameter("comments");
 		// InsertCommentsDAOをインスタンス化
 		InsertCommentsDAO insertComments = new InsertCommentsDAO();
-		
+
 		try {
+
 			// 登録処理
-			insertComments.insertComments(taskId, userId,comment);
-	
-		} catch(ClassNotFoundException | SQLException e) {
+			insertComments.insertComments(taskId, userId, comment);
+
+		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-
-		// 削除結果画面に遷移
 		RequestDispatcher rd = request.getRequestDispatcher("ViewCommentServlet");
 		rd.forward(request, response);
 	}
 }
-
-

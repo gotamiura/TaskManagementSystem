@@ -37,57 +37,51 @@
 			<td>
 				<%
 				if (task.getTaskName() != null) {
-				%> <%=task.getTaskName()%> 
-				<%
- 				}
-				%>
+				%> <%=task.getTaskName()%> <%
+ }
+ %>
 			</td>
-			
+
 			<td>
 				<%
 				if (task.getCategoryName() != null) {
-				%> <%=task.getCategoryName()%> 
-				<%
- 				}
-				%>
+				%> <%=task.getCategoryName()%> <%
+ }
+ %>
 			</td>
 
 			<td>
 				<%
 				if (task.getLimitDate() != null) {
-				%> <%=task.getLimitDate()%> 
-				<%
- 				}
-				%>
+				%> <%=task.getLimitDate()%> <%
+ }
+ %>
 			</td>
-			
+
 			<td>
 				<%
 				if (task.getUserName() != null) {
-				%> <%=task.getUserName()%> 
-				<%
- 				}
-				%>
+				%> <%=task.getUserName()%> <%
+ }
+ %>
 			</td>
 
 			<td>
 				<%
 				if (task.getStatusName() != null) {
-				%> <%=task.getStatusName()%> 
-				<%
- 				}
-				%>
+				%> <%=task.getStatusName()%> <%
+ }
+ %>
 			</td>
-			
+
 			<td>
 				<%
 				if (task.getMemo() != null) {
-				%> <%=task.getMemo()%> 
-				<%
- 				}
-				%>
+				%> <%=task.getMemo()%> <%
+ }
+ %>
 			</td>
-			
+
 			<td class="action-buttons">
 				<form action="TaskAlterServlet" method="GET">
 					<input type="hidden" name="task_id" value="<%=task.getTaskId()%>">
@@ -101,7 +95,7 @@
 					<input type="submit" value="削除">
 				</form>
 			</td>
-			
+
 			<td class="action-buttons">
 				<form action="ViewCommentServlet" method="POST">
 					<input type="hidden" name="taskId" value="<%=task.getTaskId()%>">

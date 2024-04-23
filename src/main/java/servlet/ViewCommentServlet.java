@@ -20,18 +20,12 @@ import model.entity.EnterCommentsBean;
  */
 @WebServlet("/ViewCommentServlet")
 public class ViewCommentServlet extends HttpServlet {
-	
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		int taskId = Integer.parseInt(request.getParameter("taskId"));
 		String userId = request.getParameter("userId");
 		ViewCommentDAO viewDao = new ViewCommentDAO();
@@ -43,7 +37,7 @@ public class ViewCommentServlet extends HttpServlet {
 		}
 		HttpSession session = request.getSession();
 		session.setAttribute("Comments", comments);
-			
+
 		RequestDispatcher rd = request.getRequestDispatcher("EnterCommentsServlet");
 		rd.forward(request, response);
 
