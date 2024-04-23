@@ -103,7 +103,7 @@
 			</td>
 			
 			<td class="action-buttons">
-				<form action="ViewCommentsServlet" method="POST">
+				<form action="ViewCommentServlet" method="POST">
 					<input type="hidden" name="taskId" value="<%=task.getTaskId()%>">
 					<input type="hidden" name="userId" value="<%=task.getUserId()%>">
 					<input type="submit" value="コメント">

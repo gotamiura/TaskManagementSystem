@@ -19,7 +19,7 @@ public class TaskCategoryDAO {
 		try (Connection con = ConnectionManager.getConnection();
 				Statement stmt = con.createStatement();
 				ResultSet res = stmt.executeQuery(
-						"SELECT t1.task_id, t1.task_name, t2.category_name, t1.limit_date, t3.user_name, t4.status_name, t1.memo "
+						"SELECT t1.task_id, t1.task_name, t2.category_name, t1.limit_date, t3.user_id, t3.user_name, t4.status_name, t1.memo "
 								+
 								"FROM task_db.t_task t1 " +
 								"LEFT JOIN task_db.m_category t2 ON t1.category_id = t2.category_id " +
@@ -32,7 +32,8 @@ public class TaskCategoryDAO {
 				String taskName = res.getString("task_name");
 				String categoryName = res.getString("category_name");
 				Date limitDate = res.getDate("limit_date");
-				String userId = res.getString("user_name");
+				String userId = res.getString("user_id");
+				String userName = res.getString("user_name");
 				String statusName = res.getString("status_name");
 				String memo = res.getString("memo");
 
@@ -41,8 +42,8 @@ public class TaskCategoryDAO {
 				task.setTaskName(taskName);
 				task.setCategoryName(categoryName);
 				task.setLimitDate(limitDate); // Date型のままセット
-				
-				task.setUserName(userId);
+				task.setUserId(userId);
+				task.setUserName(userName);
 				task.setStatusName(statusName);
 				task.setMemo(memo);
 

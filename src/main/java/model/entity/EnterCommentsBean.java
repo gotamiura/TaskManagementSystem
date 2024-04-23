@@ -1,5 +1,7 @@
 package model.entity;
 
+import java.sql.Timestamp;
+
 public class EnterCommentsBean {
 	private int commentId;
 	private int taskId;
@@ -7,6 +9,19 @@ public class EnterCommentsBean {
 	private String userId;
 	private String userName;
 	private String comment;
+	private Timestamp updateDatetime;
+	/**
+	 * @return updateDatetime
+	 */
+	public Timestamp getUpdateDatetime() {
+		return updateDatetime;
+	}
+	/**
+	 * @param updateDatetime セットする updateDatetime
+	 */
+	public void setUpdateDatetime(Timestamp updateDatetime) {
+		this.updateDatetime = updateDatetime;
+	}
 	/**
 	 * @return commentId
 	 */
