@@ -25,19 +25,7 @@ public class ViewCommentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int taskId = Integer.parseInt(request.getParameter("taskId"));
-		String userId = request.getParameter("userId");
-		ViewCommentDAO viewDao = new ViewCommentDAO();
-		try {
-			List<EnterCommentsBean> comments = viewDao.showComments(taskId, userId);
-			HttpSession session = request.getSession();
-			session.setAttribute("Comments", comments);
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("enter-comments.jsp");
-		rd.forward(request, response);
 	}
 
 	/**
@@ -56,7 +44,7 @@ public class ViewCommentServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("Comments", comments);
 			
-		RequestDispatcher rd = request.getRequestDispatcher("enter-comments.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("EnterCommentsServlet");
 		rd.forward(request, response);
 
 	}

@@ -5,17 +5,19 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class InsertCommentsDAO {
-	
-	public int deleteTask(int taskId) throws SQLException, ClassNotFoundException {
 
-		String sql = "DELETE FROM t_task WHERE task_id = ?";
-		int processingNumber = 0; //処理件数
+	public int insertComments(int taskId, String userId, String comment) throws ClassNotFoundException, SQLException {
+		int count = 0;
 		try (Connection con = ConnectionManager.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql);) {
-			// プレースホルダへの値の設定
-			pstmt.setInt(1, taskId);
-			processingNumber = pstmt.executeUpdate();
+				PreparedStatement pstmt = con.prepareStatement("INSERT INTO t_comment(task_id, user_id, comment) VALUES (?, ?, ?)")) {
+				
+				pstmt.setInt(1,taskId);
+				pstmt.setString(2,userId);
+				pstmt.setString(3, comment);
+				
+				count = pstmt.executeUpdate();
 		}
-		return processingNumber;
+		
+		return count;
 	}
 }
