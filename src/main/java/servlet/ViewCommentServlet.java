@@ -27,11 +27,11 @@ public class ViewCommentServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int taskId = Integer.parseInt(request.getParameter("taskId"));
-		String userId = request.getParameter("userId");
+		//String userId = request.getParameter("userId");
 		ViewCommentDAO viewDao = new ViewCommentDAO();
 		List<EnterCommentsBean> comments = null;
 		try {
-			comments = viewDao.showComments(taskId, userId);
+			comments = viewDao.showComments(taskId);
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}

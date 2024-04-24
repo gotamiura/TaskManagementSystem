@@ -40,6 +40,7 @@ public class LoginServlet extends HttpServlet {
 				String userName = userDao.userName(userId, password);
 				// セッションスコープへの属性の設定
 				session.setAttribute("UserName", userName);
+				session.setAttribute("UserId", userId);
 			} else {
 				url = "login-failure.jsp";//ログイン失敗画面
 			}

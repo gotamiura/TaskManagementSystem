@@ -30,9 +30,9 @@ public class CommentsResultServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		// リクエストからタスクIDを取得
-		EnterCommentsBean comments = (EnterCommentsBean) session.getAttribute("comments");
+		EnterCommentsBean comments = (EnterCommentsBean) session.getAttribute("comments");		
 		int taskId = comments.getTaskId();
-		String userId = comments.getUserId();
+		String commentUserId = (String)session.getAttribute("UserId");
 		String comment = request.getParameter("comments");
 		// InsertCommentsDAOをインスタンス化
 		InsertCommentsDAO insertComments = new InsertCommentsDAO();
@@ -40,7 +40,7 @@ public class CommentsResultServlet extends HttpServlet {
 		try {
 
 			// 登録処理
-			insertComments.insertComments(taskId, userId, comment);
+			insertComments.insertComments(taskId, commentUserId, comment);
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
