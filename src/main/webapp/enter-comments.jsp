@@ -36,13 +36,12 @@
 			</tr>
 			<tr>
 				<th>コメント</th>
-				<td><input type="text" name="comments"></td>
+				<td><input type="text" name="comments" required></td>
 			</tr>
 		</table>
-		<br> <input type="hidden" name="taskId"
-			value="<%=comments.getTaskId()%>"> <input type="hidden"
-			name="userId" value="<%=comments.getUserId()%>"> <input
-			type="submit" value="コメントする">
+		<br> <input type="hidden" name="taskId" value="<%=comments.getTaskId()%>"> 
+			<input type="hidden" name="userId" value="<%=comments.getUserId()%>"> 
+			<input type="submit" value="コメントする">
 	</form>
 	<br>
 
@@ -64,10 +63,10 @@
 		for (EnterCommentsBean viewComments : pastComments) {
 		%>
 		<tr>
-			<td><%=viewComments.getCommentId()%></td>
 			<td><%=viewComments.getTaskName()%></td>
 			<td><%=viewComments.getUserName()%></td>
 			<td><%=viewComments.getComment()%></td>
+			<td><%=viewComments.getUpdateDatetime()%></td>
 		</tr>
 		<%
 		}
