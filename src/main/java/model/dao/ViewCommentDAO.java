@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class ViewCommentDAO {
 				String userId1 = res.getString("user_id");
 				String userName = res.getString("user_name");
 				String comment = res.getString("comment");
+				Timestamp updateDate = res.getTimestamp("update_datetime");
 						
 				EnterCommentsBean commentBean = new EnterCommentsBean();
 				commentBean.setCommentId(commentId);
@@ -37,11 +39,11 @@ public class ViewCommentDAO {
 				commentBean.setUserId(userId1);
 				commentBean.setUserName(userName);
 				commentBean.setComment(comment);
-
+				commentBean.setUpdateDatetime(updateDate);
+				
 				commentList.add(commentBean);
 			}
 		}
-
 		return commentList;
 	}
 }
