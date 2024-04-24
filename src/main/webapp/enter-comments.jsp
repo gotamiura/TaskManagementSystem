@@ -67,6 +67,12 @@
 			<td><%=viewComments.getUserName()%></td>
 			<td><%=viewComments.getComment()%></td>
 			<td><%=viewComments.getUpdateDatetime()%></td>
+			<td class="action-buttons">
+				<form action="DeleteCommentServlet" method="POST">
+					<input type="hidden" name="commentId" value="<%=viewComments.getCommentId()%>">
+					<input type="submit" value="削除">
+				</form>
+			</td>
 		</tr>
 		<%
 		}
