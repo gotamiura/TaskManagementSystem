@@ -17,7 +17,7 @@ public class ViewCommentDAO {
 
 		try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(
-						"SELECT t1.task_id, t1.task_name, t3.user_id, t3.user_name, t2.comment FROM task_db.t_task t1 JOIN task_db.t_comment t2 ON t1.task_id = t2.task_id JOIN task_db.m_user t3 ON t1.user_id = t3.user_id WHERE t1.task_id = ?")) {
+						"SELECT t1.task_id, t1.task_name, t3.user_id, t3.user_name, t2.comment FROM task_db.t_task t1 LEFT JOIN task_db.t_comment t2 ON t1.task_id = t2.task_id LEFT JOIN task_db.m_user t3 ON t1.user_id = t3.user_id WHERE t1.task_id = ?")) {
 			pstmt.setInt(1, taskId);
 			ResultSet res = pstmt.executeQuery();
 			if (res.next()) {
