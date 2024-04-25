@@ -74,8 +74,9 @@
         <input type="submit" value="削除する">
     </form>
     <br>
-    <form action="task-list.jsp" method="POST">
-        <input type="submit" value="タスク一覧へ">
+    <form action=ViewCommentServlet method="GET">
+    <input type="hidden" name="taskId" value="<%=confirmComments.getTaskId()%>">
+        <input type="submit" value="コメント入力画面へ">
     </form>
 </body>
 </html>
