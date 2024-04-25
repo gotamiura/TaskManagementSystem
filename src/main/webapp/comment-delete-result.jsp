@@ -11,9 +11,9 @@
 	<hr>
 
 	<%
-	EnterCommentsBean DeleteComment = (EnterCommentsBean) session.getAttribute("DeleteComment");
-	EnterCommentsBean comments = (EnterCommentsBean) session.getAttribute("comments");
-	int processingNumber = (Integer) request.getAttribute("processingNumber");
+	EnterCommentsBean confirmComments = (EnterCommentsBean) session.getAttribute("confirmComments");
+	
+	int processingNumber = (int) request.getAttribute("processingNumber");
 	if (processingNumber > 0) {
 	%>
 	<h2>次のデータを削除しました。</h2>
@@ -25,7 +25,8 @@
 	}
 	%>
 	<br>
-	<form action="ViewCommentServlet" method="POST">
+	<form action="ViewCommentServlet" method="GET">
+	<input type="hidden" name="taskId" value="<%=confirmComments.getTaskId()%>">
 		<input type="submit" value="コメント入力画面">
 	</form>
 

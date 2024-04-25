@@ -23,19 +23,27 @@ public class DeleteCommentServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// リクエストのエンコーディング方式を指定
+		request.setCharacterEncoding("UTF-8");
+		
 		// リクエストからタスクIDを取得
-		int taskId = Integer.parseInt(request.getParameter("taskId"));
-		String userId = request.getParameter("userId");
-		int commentId = Integer.parseInt(request.getParameter("commentId"));
+		String taskName = request.getParameter("taskName");
+		String userName = request.getParameter("userName");
+		String comment = request.getParameter("comment");
 		String updateDateTime = request.getParameter("updateDateTime");
+		int taskID = Integer.parseInt(request.getParameter("taskID"));
+		int commentID = Integer.parseInt(request.getParameter("commentID"));
+		
 		
 		//confirmCommentsを初期化
 		EnterCommentsBean confirmComments = new EnterCommentsBean();
 
-		confirmComments.setTaskId(taskId);
-		confirmComments.setUserId(userId);
-		confirmComments.setCommentId(commentId);
+		confirmComments.setTaskName(taskName);
+		confirmComments.setUserName(userName);
+		confirmComments.setComment(comment);
 		confirmComments.setUpdateDatetime(Timestamp.valueOf(updateDateTime));
+		confirmComments.setTaskId(taskID);
+		confirmComments.setCommentId(commentID);
 
 		HttpSession session = request.getSession();
 

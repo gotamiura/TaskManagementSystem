@@ -1,3 +1,4 @@
+<%@page import="servlet.ViewCommentServlet"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
 	import="model.entity.EnterCommentsBean, java.util.List, java.lang.Iterable,java.text.SimpleDateFormat, java.util.Date,java.sql.Timestamp"%>
@@ -65,6 +66,7 @@
 			<td><%=viewComments.getTaskName()%></td>
 			<td><%=viewComments.getUserName()%></td>
 			<td><%=viewComments.getComment()%></td>
+			
 			<td>
 				<%
 				Timestamp timestamp = viewComments.getUpdateDatetime();
@@ -75,10 +77,12 @@
 			</td>
 			<td class="action-buttons">
 				<form action="DeleteCommentServlet" method="POST">
-					<input type="hidden" name="taskId" value="<%=viewComments.getTaskId()%>">
-					<input type="hidden" name="userId" value="<%=viewComments.getUserId()%>">
-					<input type="hidden" name="commentId" value="<%=viewComments.getCommentId()%>">
+					<input type="hidden" name="taskName" value="<%=viewComments.getTaskName()%>">
+					<input type="hidden" name="userName" value="<%=viewComments.getUserName()%>">
+					<input type="hidden" name="comment" value="<%=viewComments.getComment()%>">
 					<input type="hidden" name="updateDateTime" value="<%=viewComments.getUpdateDatetime()%>"> 
+					<input type="hidden" name="taskID" value="<%=viewComments.getTaskId()%>">
+					<input type="hidden" name="commentID" value="<%=viewComments.getCommentId()%>">
 					<input type="submit" value="削除">
 				</form>
 			</td>

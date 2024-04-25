@@ -62,7 +62,7 @@
         </tr>
     </table>
     <br>
-    <form action="DeleteCommentResultServlet" method="GET">
+    <form action="DeleteCommentResultServlet" method="POST">
         <input type="submit" value="削除する">
     </form>
     <br>
