@@ -41,7 +41,7 @@ public class ViewCommentDAO {
 		List<EnterCommentsBean> commentList = new ArrayList<>();
 		try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(
-						"SELECT c.comment_id, c.task_id, t.task_name, c.user_id, u.user_name, c.comment, c.update_datetime FROM t_comment c JOIN t_task t on c.task_id = t.task_id JOIN m_user u on c.user_id = u.user_id WHERE c.task_id = ?")) {
+						"SELECT c.comment_id, c.task_id, t.task_name, c.user_id, u.user_name, c.comment, c.update_datetime FROM t_comment c JOIN t_task t on c.task_id = t.task_id JOIN m_user u on c.user_id = u.user_id WHERE c.task_id = ? ORDER BY c.comment_id")) {
 
 			pstmt.setInt(1, taskId);
 			//pstmt.setString(2, userId);

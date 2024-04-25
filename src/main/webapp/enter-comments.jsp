@@ -41,7 +41,7 @@
 		<input type="hidden" name="userId" value="<%=newComments.getUserId()%>"> 
 		<input type="submit" value="コメントする">
 	<br>
-
+	<br>
 	<%
 	List<EnterCommentsBean> pastComments = (List<EnterCommentsBean>) session.getAttribute("OldComments");
 	%>
