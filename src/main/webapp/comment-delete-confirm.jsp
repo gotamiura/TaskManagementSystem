@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="model.entity.EnterCommentsBean, java.util.List, java.lang.Iterable"%>
+    pageEncoding="UTF-8" import="model.entity.EnterCommentsBean, java.util.List, java.lang.Iterable,java.text.SimpleDateFormat, java.util.Date,java.sql.Timestamp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +16,9 @@
     <h2>コメントを削除します。よろしいですか？</h2>
     <br>
     <table border="1">
+    	<%
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		%>
         <tr>
             <th>対象のタスク情報</th>
             <td>
@@ -54,7 +57,12 @@
              <td>
 				<%
 				if (confirmComments.getUpdateDatetime() != null) {
-				%> <%=confirmComments.getUpdateDatetime()%> 
+				%> <%
+				Timestamp timestamp = confirmComments.getUpdateDatetime();
+				Date date = new Date(timestamp.getTime());
+				String formattedDate = dateFormat.format(date);
+				out.print(formattedDate);
+				%>
 				<%
  				}
 				%>
