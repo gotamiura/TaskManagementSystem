@@ -23,14 +23,14 @@ public class CommentsResultServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		// リクエストのエンコーディング方式を指定
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		// リクエストからタスクIDを取得
-		EnterCommentsBean comments = (EnterCommentsBean) session.getAttribute("comments");		
+		EnterCommentsBean comments = (EnterCommentsBean) session.getAttribute("NewComments");		
 		int taskId = comments.getTaskId();
 		String commentUserId = (String)session.getAttribute("UserId");
 		String comment = request.getParameter("comments");
@@ -38,7 +38,6 @@ public class CommentsResultServlet extends HttpServlet {
 		InsertCommentsDAO insertComments = new InsertCommentsDAO();
 
 		try {
-
 			// 登録処理
 			insertComments.insertComments(taskId, commentUserId, comment);
 

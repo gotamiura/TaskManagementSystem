@@ -82,7 +82,7 @@
 		</tr>
 	</table><br>
 	<input type="submit" value="編集実行"><br><br>
-	<a href="menu.jsp"> <input type="submit" value="メニュー画面へ"></a>
 	</form>	
+	<a href="menu.jsp"> <input type="submit" value="メニュー画面へ"></a>
 </body>
 </html>
