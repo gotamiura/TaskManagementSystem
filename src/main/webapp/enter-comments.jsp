@@ -40,6 +40,7 @@
 		<input type="hidden" name="taskId" value="<%=newComments.getTaskId()%>"> 
 		<input type="hidden" name="userId" value="<%=newComments.getUserId()%>"> 
 		<input type="submit" value="コメントする">
+		</form>
 	<br>
 	<br>
 	<%
@@ -74,9 +75,11 @@
 			</td>
 			<td class="action-buttons">
 				<form action="DeleteCommentServlet" method="POST">
-					<input type="hidden" name="commentId"
-						value="<%=viewComments.getCommentId()%>"> <input
-						type="submit" value="削除">
+					<input type="hidden" name="taskId" value="<%=viewComments.getTaskId()%>">
+					<input type="hidden" name="userId" value="<%=viewComments.getUserId()%>">
+					<input type="hidden" name="commentId" value="<%=viewComments.getCommentId()%>">
+					<input type="hidden" name="updateDateTime" value="<%=viewComments.getUpdateDatetime()%>"> 
+					<input type="submit" value="削除">
 				</form>
 			</td>
 		</tr>
@@ -87,7 +90,6 @@
 	<%
 	}
 	%><br>
-	</form>
 	<form action="task-list.jsp" method="POST">
 		<input type="submit" value="タスク一覧へ">
 	</form>
