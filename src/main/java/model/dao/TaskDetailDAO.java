@@ -22,14 +22,33 @@ public class TaskDetailDAO {
     public TaskCategoryBean selectTask(int taskId) throws SQLException, ClassNotFoundException {
         TaskCategoryBean taskDetail = null;
 
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT ");
+        sb.append("t1.task_id ");
+        sb.append(",t1.task_name ");
+        sb.append(",t1.category_id ");
+        sb.append(",t2.category_name ");
+        sb.append(",t1.limit_date ");
+        sb.append(",t1.user_id ");
+        sb.append(",t3.user_name ");
+        sb.append(",t1.status_code ");
+        sb.append(",t4.status_name ");
+        sb.append(",t1.memo ");
+        sb.append("FROM ");
+        sb.append("task_db.t_task t1 ");
+        sb.append("LEFT JOIN task_db.m_category t2 ");
+        sb.append("ON t1.category_id = t2.category_id ");
+        sb.append("LEFT JOIN task_db.m_user t3 ");
+        sb.append("ON t1.user_id = t3.user_id ");
+        sb.append("LEFT JOIN task_db.m_status t4 ");
+        sb.append("ON t1.status_code = t4.status_code ");
+        sb.append("WHERE ");
+        sb.append("t1.task_id = ? ");
+
+        String sql = sb.toString();
+
         try (Connection con = ConnectionManager.getConnection();
-             PreparedStatement pstmt = con.prepareStatement(
-                     "SELECT t1.task_id, t1.task_name,t1.category_id, t2.category_name, t1.limit_date,t1.user_id, t3.user_name, t1.status_code, t4.status_name, t1.memo " +
-                     "FROM task_db.t_task t1 " +
-                     "LEFT JOIN task_db.m_category t2 ON t1.category_id = t2.category_id " +
-                     "LEFT JOIN task_db.m_user t3 ON t1.user_id = t3.user_id " +
-                     "LEFT JOIN task_db.m_status t4 ON t1.status_code = t4.status_code " +
-                     "WHERE t1.task_id = ?")) {
+             PreparedStatement pstmt = con.prepareStatement(sql)) {
             pstmt.setInt(1, taskId);
             try (ResultSet res = pstmt.executeQuery()) {
                 if (res.next()) {

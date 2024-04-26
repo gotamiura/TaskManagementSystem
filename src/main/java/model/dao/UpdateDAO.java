@@ -11,9 +11,22 @@ public class UpdateDAO {
 	public int updateTask(TaskCategoryBean updateItem) throws ClassNotFoundException, SQLException {
 		int processingNumber = 0; //処理件数
 
-		String sql = "UPDATE t_task SET task_name = ?, category_id = ?, limit_date = ?, user_id = ?,status_code = ?,memo = ? WHERE task_id = ?";
-		try (Connection con = ConnectionManager.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql);) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("UPDATE t_task ");
+        sb.append("SET ");
+        sb.append("task_name = ? ");
+        sb.append(",category_id = ? ");
+        sb.append(",limit_date = ? ");
+        sb.append(",user_id = ? ");
+        sb.append(",status_code = ? ");
+        sb.append(",memo = ? ");
+        sb.append("WHERE ");
+        sb.append("task_id = ? ");
+
+        String sql = sb.toString();
+
+        try (Connection con = ConnectionManager.getConnection();
+             PreparedStatement pstmt = con.prepareStatement(sql)) {
 			// プレースホルダへの値の設定
 			pstmt.setString(1, updateItem.getTaskName());
 			pstmt.setInt(2, updateItem.getCategoryId());

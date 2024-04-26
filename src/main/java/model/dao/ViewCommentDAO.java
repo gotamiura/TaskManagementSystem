@@ -15,9 +15,26 @@ public class ViewCommentDAO {
 	public EnterCommentsBean selectComments(int taskId) throws SQLException, ClassNotFoundException {
 		EnterCommentsBean enterComments = null;
 
-		try (Connection con = ConnectionManager.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(
-						"SELECT t1.task_id, t1.task_name, t3.user_id, t3.user_name, t2.comment FROM task_db.t_task t1 LEFT JOIN task_db.t_comment t2 ON t1.task_id = t2.task_id LEFT JOIN task_db.m_user t3 ON t1.user_id = t3.user_id WHERE t1.task_id = ?")) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT ");
+        sb.append("t1.task_id ");
+        sb.append(",t1.task_name ");
+        sb.append(",t3.user_id ");
+        sb.append(",t3.user_name ");
+        sb.append(",t2.comment ");
+        sb.append("FROM ");
+        sb.append("task_db.t_task t1 ");
+        sb.append("LEFT JOIN task_db.t_comment t2 ");
+        sb.append("ON t1.task_id = t2.task_id ");
+        sb.append("LEFT JOIN task_db.m_user t3 ");
+        sb.append("ON t1.user_id = t3.user_id ");
+        sb.append("WHERE ");
+        sb.append("t1.task_id = ? ");
+
+        String sql = sb.toString();
+
+        try (Connection con = ConnectionManager.getConnection();
+             PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setInt(1, taskId);
 			ResultSet res = pstmt.executeQuery();
 			if (res.next()) {
@@ -37,12 +54,29 @@ public class ViewCommentDAO {
 	public List<EnterCommentsBean> showComments(int taskId) throws ClassNotFoundException, SQLException {
 
 		List<EnterCommentsBean> commentList = new ArrayList<>();
-		try (Connection con = ConnectionManager.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(
-						"SELECT c.comment_id, c.task_id, t.task_name, c.user_id, u.user_name, c.comment, c.update_datetime FROM t_comment c JOIN t_task t on c.task_id = t.task_id JOIN m_user u on c.user_id = u.user_id WHERE c.task_id = ? ORDER BY c.comment_id")) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT ");
+        sb.append("c.comment_id ");
+        sb.append(",c.task_id ");
+        sb.append(",t.task_name ");
+        sb.append(",c.user_id ");
+        sb.append(",u.user_name ");
+        sb.append(",c.comment ");
+        sb.append(",c.update_datetime ");
+        sb.append("FROM ");
+        sb.append("t_comment c JOIN t_task t ");
+        sb.append("on c.task_id = t.task_id JOIN m_user u ");
+        sb.append("on c.user_id = u.user_id ");
+        sb.append("WHERE ");
+        sb.append("c.task_id = ? ");
+        sb.append("ORDER BY ");
+        sb.append("c.comment_id ");
 
+        String sql = sb.toString();
+
+        try (Connection con = ConnectionManager.getConnection();
+             PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setInt(1, taskId);
-			//pstmt.setString(2, userId);
 
 			ResultSet res = pstmt.executeQuery();
 			while (res.next()) {

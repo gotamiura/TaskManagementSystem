@@ -12,10 +12,29 @@ public class DeleteCommentDAO {
 	public EnterCommentsBean selectComments(int commentId) throws SQLException, ClassNotFoundException {
 		EnterCommentsBean deleteComments = null;
 
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT ");
+		sb.append("t1.task_id ");
+		sb.append(",t1.task_name ");
+		sb.append(",t3.user_id ");
+		sb.append(",t3.user_name ");
+		sb.append(",t2.comment_id ");
+		sb.append(",t2.comment ");
+		sb.append(",t2.update_datetime ");
+		sb.append("FROM ");
+		sb.append("task_db.t_task t1 ");
+		sb.append("INNER JOIN task_db.t_comment t2 ");
+		sb.append("ON t1.task_id = t2.task_id ");
+		sb.append("INNER JOIN task_db.m_user t3 ");
+		sb.append("ON t1.user_id = t3.user_id ");
+		sb.append("WHERE ");
+		sb.append("t2.comment_id = ? ");
+
+		String sql = sb.toString();
+
 		try (
 				Connection con = ConnectionManager.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(
-						"SELECT t1.task_id, t1.task_name, t3.user_id, t3.user_name, t2.comment_id, t2.comment, t2.update_datetime FROM task_db.t_task t1 INNER JOIN task_db.t_comment t2 ON t1.task_id = t2.task_id INNER JOIN task_db.m_user t3 ON t1.user_id = t3.user_id WHERE t2.comment_id = ?")) {
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setInt(1, commentId);
 			try (ResultSet res = pstmt.executeQuery()) {
 				if (res.next()) {
