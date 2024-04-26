@@ -12,32 +12,40 @@ import model.entity.EnterCommentsBean;
 
 public class ViewCommentDAO {
 
+	/**
+	 * このメソッドはタスク一覧画面のデータをコメント入力フォームに返します。
+	 * @param taskId
+	 * @return
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public EnterCommentsBean selectComments(int taskId) throws SQLException, ClassNotFoundException {
 		EnterCommentsBean enterComments = null;
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("SELECT ");
-        sb.append("t1.task_id ");
-        sb.append(",t1.task_name ");
-        sb.append(",t3.user_id ");
-        sb.append(",t3.user_name ");
-        sb.append(",t2.comment ");
-        sb.append("FROM ");
-        sb.append("task_db.t_task t1 ");
-        sb.append("LEFT JOIN task_db.t_comment t2 ");
-        sb.append("ON t1.task_id = t2.task_id ");
-        sb.append("LEFT JOIN task_db.m_user t3 ");
-        sb.append("ON t1.user_id = t3.user_id ");
-        sb.append("WHERE ");
-        sb.append("t1.task_id = ? ");
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT ");
+		sb.append("t1.task_id ");
+		sb.append(",t1.task_name ");
+		sb.append(",t3.user_id ");
+		sb.append(",t3.user_name ");
+		sb.append(",t2.comment ");
+		sb.append("FROM ");
+		sb.append("task_db.t_task t1 ");
+		sb.append("LEFT JOIN task_db.t_comment t2 ");
+		sb.append("ON t1.task_id = t2.task_id ");
+		sb.append("LEFT JOIN task_db.m_user t3 ");
+		sb.append("ON t1.user_id = t3.user_id ");
+		sb.append("WHERE ");
+		sb.append("t1.task_id = ? ");
 
-        String sql = sb.toString();
-
-        try (Connection con = ConnectionManager.getConnection();
-             PreparedStatement pstmt = con.prepareStatement(sql)) {
+		String sql = sb.toString();
+		// データベース接続の取得
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setInt(1, taskId);
 			ResultSet res = pstmt.executeQuery();
 			if (res.next()) {
+				// 結果の取得
 				enterComments = new EnterCommentsBean();
 				enterComments.setTaskId(res.getInt("task_id"));
 				enterComments.setTaskName(res.getString("task_Name"));
@@ -50,36 +58,44 @@ public class ViewCommentDAO {
 
 		return enterComments;
 	}
-
+	
+	/**
+	 * このメソッドは、すでに書き込まれたコメントをデータベースから返します。
+	 * @param taskId
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public List<EnterCommentsBean> showComments(int taskId) throws ClassNotFoundException, SQLException {
 
 		List<EnterCommentsBean> commentList = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
-        sb.append("SELECT ");
-        sb.append("c.comment_id ");
-        sb.append(",c.task_id ");
-        sb.append(",t.task_name ");
-        sb.append(",c.user_id ");
-        sb.append(",u.user_name ");
-        sb.append(",c.comment ");
-        sb.append(",c.update_datetime ");
-        sb.append("FROM ");
-        sb.append("t_comment c JOIN t_task t ");
-        sb.append("on c.task_id = t.task_id JOIN m_user u ");
-        sb.append("on c.user_id = u.user_id ");
-        sb.append("WHERE ");
-        sb.append("c.task_id = ? ");
-        sb.append("ORDER BY ");
-        sb.append("c.comment_id ");
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT ");
+		sb.append("c.comment_id ");
+		sb.append(",c.task_id ");
+		sb.append(",t.task_name ");
+		sb.append(",c.user_id ");
+		sb.append(",u.user_name ");
+		sb.append(",c.comment ");
+		sb.append(",c.update_datetime ");
+		sb.append("FROM ");
+		sb.append("t_comment c JOIN t_task t ");
+		sb.append("on c.task_id = t.task_id JOIN m_user u ");
+		sb.append("on c.user_id = u.user_id ");
+		sb.append("WHERE ");
+		sb.append("c.task_id = ? ");
+		sb.append("ORDER BY ");
+		sb.append("c.comment_id ");
 
-        String sql = sb.toString();
+		String sql = sb.toString();
 
-        try (Connection con = ConnectionManager.getConnection();
-             PreparedStatement pstmt = con.prepareStatement(sql)) {
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setInt(1, taskId);
 
 			ResultSet res = pstmt.executeQuery();
 			while (res.next()) {
+				// 結果の取得
 				int commentId = res.getInt("comment_id");
 				int taskId1 = res.getInt("task_id");
 				String taskName = res.getString("task_name");

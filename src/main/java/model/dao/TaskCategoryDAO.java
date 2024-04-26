@@ -12,38 +12,45 @@ import model.entity.TaskCategoryBean;
 
 public class TaskCategoryDAO {
 
+	/**
+	 * このメソッドはタスクリストを返します。
+	 * @return
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public List<TaskCategoryBean> selectAll() throws SQLException, ClassNotFoundException {
 
 		List<TaskCategoryBean> taskList = new ArrayList<>();
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("SELECT ");
-        sb.append("t1.task_id ");
-        sb.append(",t1.task_name ");
-        sb.append(",t2.category_name ");
-        sb.append(",t1.limit_date ");
-        sb.append(",t3.user_id ");
-        sb.append(",t3.user_name ");
-        sb.append(",t4.status_name ");
-        sb.append(",t1.memo ");
-        sb.append("FROM ");
-        sb.append("task_db.t_task t1 ");
-        sb.append("LEFT JOIN task_db.m_category t2 ");
-        sb.append("ON t1.category_id = t2.category_id ");
-        sb.append("LEFT JOIN task_db.m_user t3 ");
-        sb.append("ON t1.user_id = t3.user_id ");
-        sb.append("LEFT JOIN task_db.m_status t4 ");
-        sb.append("ON t1.status_code = t4.status_code ");
-        sb.append("ORDER BY ");
-        sb.append("task_id ");
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT ");
+		sb.append("t1.task_id ");
+		sb.append(",t1.task_name ");
+		sb.append(",t2.category_name ");
+		sb.append(",t1.limit_date ");
+		sb.append(",t3.user_id ");
+		sb.append(",t3.user_name ");
+		sb.append(",t4.status_name ");
+		sb.append(",t1.memo ");
+		sb.append("FROM ");
+		sb.append("task_db.t_task t1 ");
+		sb.append("LEFT JOIN task_db.m_category t2 ");
+		sb.append("ON t1.category_id = t2.category_id ");
+		sb.append("LEFT JOIN task_db.m_user t3 ");
+		sb.append("ON t1.user_id = t3.user_id ");
+		sb.append("LEFT JOIN task_db.m_status t4 ");
+		sb.append("ON t1.status_code = t4.status_code ");
+		sb.append("ORDER BY ");
+		sb.append("task_id ");
 
-        String sql = sb.toString();
-
-        try (Connection con = ConnectionManager.getConnection();
-             Statement stmt = con.createStatement();
-             ResultSet res = stmt.executeQuery(sql)) {
+		String sql = sb.toString();
+		// データベース接続の取得
+		try (Connection con = ConnectionManager.getConnection();
+				Statement stmt = con.createStatement();
+				ResultSet res = stmt.executeQuery(sql)) {
 
 			while (res.next()) {
+				// 結果の取得
 				int taskId = res.getInt("task_id");
 				String taskName = res.getString("task_name");
 				String categoryName = res.getString("category_name");

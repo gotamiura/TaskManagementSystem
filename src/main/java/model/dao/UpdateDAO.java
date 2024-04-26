@@ -8,6 +8,13 @@ import java.sql.SQLException;
 import model.entity.TaskCategoryBean;
 
 public class UpdateDAO {
+	/**
+	 * タスクテーブルのタスクを更新します。
+	 * @param updateItem
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public int updateTask(TaskCategoryBean updateItem) throws ClassNotFoundException, SQLException {
 		int processingNumber = 0; //処理件数
 
@@ -41,6 +48,13 @@ public class UpdateDAO {
 
 	}
 
+	/**
+	 * カテゴリ ID を使用してカテゴリ名を取得します。
+	 * @param category_id
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public String getCategoryName(int category_id) throws ClassNotFoundException, SQLException {
 		String categoryName = null;
 		String sql = "SELECT category_name FROM m_category WHERE category_id = ?";
@@ -57,6 +71,13 @@ public class UpdateDAO {
 
 	}
 
+	/**
+	 * ユーザID を使用してユーザ名を取得します。
+	 * @param user_id
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public String getUserName(String user_id) throws ClassNotFoundException, SQLException {
 		String userName = null;
 		String sql = "SELECT user_name FROM m_user WHERE user_id = ?";
@@ -71,6 +92,13 @@ public class UpdateDAO {
 		return userName;
 	}
 
+	/**
+	 * ステータスコードを使用してステータス名を取得します。
+	 * @param status_code
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public String getStatusName(String status_code) throws ClassNotFoundException, SQLException {
 		String statusName = null;
 		String sql = "SELECT status_name FROM m_status WHERE status_code = ?";

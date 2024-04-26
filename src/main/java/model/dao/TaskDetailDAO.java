@@ -46,12 +46,12 @@ public class TaskDetailDAO {
         sb.append("t1.task_id = ? ");
 
         String sql = sb.toString();
-
+     // データベース接続の取得
         try (Connection con = ConnectionManager.getConnection();
              PreparedStatement pstmt = con.prepareStatement(sql)) {
             pstmt.setInt(1, taskId);
             try (ResultSet res = pstmt.executeQuery()) {
-                if (res.next()) {
+                if (res.next()) {// 結果の取得
                     taskDetail = new TaskCategoryBean();
                     taskDetail.setTaskId(res.getInt("task_id"));
                     taskDetail.setTaskName(res.getString("task_name"));

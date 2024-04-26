@@ -9,6 +9,13 @@ import model.entity.EnterCommentsBean;
 
 public class DeleteCommentDAO {
 
+	/**
+	 * このメソッドはコメントの削除確認画面に表示されるデータを返します。
+	 * @param commentId
+	 * @return
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public EnterCommentsBean selectComments(int commentId) throws SQLException, ClassNotFoundException {
 		EnterCommentsBean deleteComments = null;
 
@@ -31,13 +38,13 @@ public class DeleteCommentDAO {
 		sb.append("t2.comment_id = ? ");
 
 		String sql = sb.toString();
-
-		try (
-				Connection con = ConnectionManager.getConnection();
+		// データベース接続の取得
+		try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
-			pstmt.setInt(1, commentId);
+			pstmt.setInt(1, commentId);// プレースホルダへの値の設定
 			try (ResultSet res = pstmt.executeQuery()) {
 				if (res.next()) {
+					// 結果の取得
 					deleteComments = new EnterCommentsBean();
 					deleteComments.setTaskId(res.getInt("task_id"));
 					deleteComments.setTaskName(res.getString("task_Name"));

@@ -32,30 +32,34 @@ public class TaskAlterServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// TaskDetailDAOオブジェクトの作成
 		TaskDetailDAO dao = new TaskDetailDAO();
+		// リクエストからタスクIDを取得
 		int taskId = Integer.parseInt(request.getParameter("task_id"));
 		TaskCategoryBean task = null;
+		// taskDAOオブジェクトの作成
 		taskDAO taskdao = new taskDAO();
 		List<CategoryBean> category = null;
 		List<UserBean> users = null;
 		List<TMSBean> status = null;
 
 		try {
-			task = dao.selectTask(taskId);
-			category = taskdao.getCategory();
-			users = taskdao.getUserName();
-			status = taskdao.setStatusName();
+			task = dao.selectTask(taskId);// タスクを取得
+			category = taskdao.getCategory();// カテゴリーを取得
+			users = taskdao.getUserName();// ユーザー名を取得
+			status = taskdao.setStatusName();// ステータスを設定
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
+		// セッションの取得
 		HttpSession session = request.getSession();
 		session.setAttribute("TaskId", taskId);
 		session.setAttribute("TaskDetail", task);
 		session.setAttribute("AlterTaskCategory", category);
 		session.setAttribute("AlterPersoninCharge", users);
 		session.setAttribute("AlterStatus", status);
-
+		// リクエストを転送
 		RequestDispatcher rd = request.getRequestDispatcher("task-alter-form.jsp");
 		rd.forward(request, response);
 	}
