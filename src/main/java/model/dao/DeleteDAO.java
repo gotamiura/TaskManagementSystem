@@ -33,7 +33,7 @@ public class DeleteDAO {
 				processingNumber += pstmt2.executeUpdate();//タスク削除処理
 				con.commit();
 			} catch (SQLException e) {
-				con.rollback();//コメント失敗場合は
+				con.rollback();
 				processingNumber = 0;
 				e.printStackTrace();
 			}
