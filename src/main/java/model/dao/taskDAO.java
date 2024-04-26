@@ -52,9 +52,19 @@ public class taskDAO {
 	public int insert(TaskBean taskBean) throws ClassNotFoundException, SQLException {
 		
 		int count = 0;
-		try (Connection con = ConnectionManager.getConnection();
-				PreparedStatement pstmt = con.prepareStatement("INSERT INTO t_task(task_name,category_id, limit_date,user_id,status_code,memo) VALUES (?, ?, ?, ?, ?,?)")) {
-				
+	    StringBuilder sb = new StringBuilder();
+	    sb.append("INSERT INTO t_task( ");
+	    sb.append("task_name ");
+	    sb.append(", category_id ");
+	    sb.append(", limit_date");
+	    sb.append(", user_id ");
+	    sb.append(", status_code ");
+	    sb.append(", memo) ");
+	    sb.append("VALUES (? , ? , ? , ? , ? , ? ) ");
+	    String sql = sb.toString();
+
+	    try (Connection con = ConnectionManager.getConnection();
+	         PreparedStatement pstmt = con.prepareStatement(sql)) {
 				pstmt.setString(1,taskBean.getTaskName());
 				pstmt.setInt(2,taskBean.getCategoryId());
 				pstmt.setDate(3,taskBean.getLimitDate());
@@ -97,28 +107,47 @@ public class taskDAO {
 		
 	}
 	public TMSBean getTask(int task_id) throws ClassNotFoundException, SQLException {
-		
-		TMSBean bean = null;
-		try (Connection con = ConnectionManager.getConnection();
-				PreparedStatement pstmt = con.prepareStatement("select t1.task_name, t2.category_name, t1.limit_date, t3.user_name, t4.status_name, t1.memo from t_task as t1  left join m_category as t2 on t1.category_id = t2.category_id left join m_user as t3 on t1.user_id = t3.user_id left join m_status as t4 on t1.status_code = t4.status_code where t1.task_id = ?")){
-			pstmt.setInt(1, task_id);
-			ResultSet res = pstmt.executeQuery();
+	    TMSBean bean = null;
+	    
+	    StringBuilder sb = new StringBuilder();
+	    sb.append("SELECT ");
+	    sb.append("t1.task_name, ");
+	    sb.append("t2.category_name, ");
+	    sb.append("t1.limit_date, ");
+	    sb.append("t3.user_name, ");
+	    sb.append("t4.status_name, ");
+	    sb.append("t1.memo ");
+	    sb.append("FROM ");
+	    sb.append("t_task AS t1 ");
+	    sb.append("LEFT JOIN m_category AS t2 ");
+	    sb.append("ON t1.category_id = t2.category_id ");
+	    sb.append("LEFT JOIN m_user AS t3 ");
+	    sb.append("ON t1.user_id = t3.user_id ");
+	    sb.append("LEFT JOIN m_status AS t4 ");
+	    sb.append("ON t1.status_code = t4.status_code ");
+	    sb.append("WHERE ");
+	    sb.append("t1.task_id = ? ");
 
-			if (res.next()) {
-				//List<TMSBean> taskList = new ArrayList<TMSBean>();
-				
-				bean = new TMSBean();	
-				bean.setTaskName(res.getString("task_name"));
-				bean.setCategoryName(res.getString("category_name"));
-				bean.setLimitDate(res.getDate("limt_date"));
-				bean.setUserName(res.getString("user_name"));
-				bean.setStatusName(res.getString("status_name"));
-				bean.setMemo(res.getString("memo"));
-			}
-		}
-		return bean;
-		
+	    String sql = sb.toString();
+
+	    try (Connection con = ConnectionManager.getConnection();
+	         PreparedStatement pstmt = con.prepareStatement(sql)) {
+	        pstmt.setInt(1, task_id);
+	        try (ResultSet res = pstmt.executeQuery()) {
+	            if (res.next()) {
+	                bean = new TMSBean();    
+	                bean.setTaskName(res.getString("task_name"));
+	                bean.setCategoryName(res.getString("category_name"));
+	                bean.setLimitDate(res.getDate("limit_date"));
+	                bean.setUserName(res.getString("user_name"));
+	                bean.setStatusName(res.getString("status_name"));
+	                bean.setMemo(res.getString("memo"));
+	            }
+	        }
+	    }
+	    return bean;
 	}
+
 
 	public List<TMSBean> setStatusName() throws ClassNotFoundException, SQLException {
 		List<TMSBean> statusList = new ArrayList<TMSBean>();

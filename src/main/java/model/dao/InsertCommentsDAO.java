@@ -6,26 +6,20 @@ import java.sql.SQLException;
 
 public class InsertCommentsDAO {
 
-	public int insertComments(int taskId, String userId, String comment) throws ClassNotFoundException, SQLException {
-		int count = 0;
-        StringBuilder sb = new StringBuilder();
-        sb.append("INSERT ");
-        sb.append("INTO t_comment(task_id, user_id, comment) ");
-        sb.append("VALUES (? , ? , ? ) ");
-
-        String sql = sb.toString();
-
+    public int insertComments(int taskId, String userId, String comment) throws ClassNotFoundException, SQLException {
+        int count = 0;
         try (Connection con = ConnectionManager.getConnection();
-             PreparedStatement pstmt = con.prepareStatement(sql)) {
+             PreparedStatement pstmt = con.prepareStatement("INSERT INTO t_comment (task_id, user_id, comment) VALUES (?, ?, ?)")) {
 
+            pstmt.setInt(1, taskId);
+            pstmt.setString(2, userId);
+            pstmt.setString(3, comment);
 
-				pstmt.setInt(1,taskId);
-				pstmt.setString(2,userId);
-				pstmt.setString(3, comment);
-				
-				count = pstmt.executeUpdate();
-		}
-		
-		return count;
-	}
+            count = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            // 例外が発生した場合の処理
+            e.printStackTrace(); // 例外情報を出力
+        }
+        return count;
+    }
 }

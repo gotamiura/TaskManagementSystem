@@ -29,7 +29,7 @@ public class CommentsResultServlet extends HttpServlet {
 		// リクエストのエンコーディング方式を指定
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
-		// リクエストからタスクIDを取得
+		
 		EnterCommentsBean comments = (EnterCommentsBean) session.getAttribute("NewComments");		
 		int taskId = comments.getTaskId();
 		String commentUserId = (String)session.getAttribute("UserId");
