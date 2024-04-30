@@ -35,7 +35,7 @@
 		<table border="1">
 			<tr>
 				<th>タスク名</th>
-				<td><input type="text" name="taskName" maxlength="50" required></td>
+				<td><input type="text" name="taskName" required></td>
 			</tr>
 			<tr>
 				<th>カテゴリ情報</th>
@@ -75,7 +75,7 @@
 			</tr>
 			<tr>
 				<th>メモ</th>
-				<td><input type="text" name="memo" maxlength="100"></td>
+				<td><input type="text" name="memo"></td>
 			</tr>
 		</table>
 		<br> <input type="submit" value="登録実行">
