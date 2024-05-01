@@ -106,48 +106,6 @@ public class taskDAO {
 		return userList;
 		
 	}
-	public TMSBean getTask(int task_id) throws ClassNotFoundException, SQLException {
-	    TMSBean bean = null;
-	    
-	    StringBuilder sb = new StringBuilder();
-	    sb.append("SELECT ");
-	    sb.append("t1.task_name, ");
-	    sb.append("t2.category_name, ");
-	    sb.append("t1.limit_date, ");
-	    sb.append("t3.user_name, ");
-	    sb.append("t4.status_name, ");
-	    sb.append("t1.memo ");
-	    sb.append("FROM ");
-	    sb.append("t_task AS t1 ");
-	    sb.append("LEFT JOIN m_category AS t2 ");
-	    sb.append("ON t1.category_id = t2.category_id ");
-	    sb.append("LEFT JOIN m_user AS t3 ");
-	    sb.append("ON t1.user_id = t3.user_id ");
-	    sb.append("LEFT JOIN m_status AS t4 ");
-	    sb.append("ON t1.status_code = t4.status_code ");
-	    sb.append("WHERE ");
-	    sb.append("t1.task_id = ? ");
-
-	    String sql = sb.toString();
-
-	    try (Connection con = ConnectionManager.getConnection();
-	         PreparedStatement pstmt = con.prepareStatement(sql)) {
-	        pstmt.setInt(1, task_id);
-	        try (ResultSet res = pstmt.executeQuery()) {
-	            if (res.next()) {
-	                bean = new TMSBean();    
-	                bean.setTaskName(res.getString("task_name"));
-	                bean.setCategoryName(res.getString("category_name"));
-	                bean.setLimitDate(res.getDate("limit_date"));
-	                bean.setUserName(res.getString("user_name"));
-	                bean.setStatusName(res.getString("status_name"));
-	                bean.setMemo(res.getString("memo"));
-	            }
-	        }
-	    }
-	    return bean;
-	}
-
 
 	public List<TMSBean> setStatusName() throws ClassNotFoundException, SQLException {
 		List<TMSBean> statusList = new ArrayList<TMSBean>();
