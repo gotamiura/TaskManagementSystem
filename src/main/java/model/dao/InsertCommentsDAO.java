@@ -16,9 +16,6 @@ public class InsertCommentsDAO {
             pstmt.setString(3, comment);
 
             count = pstmt.executeUpdate();
-        } catch (SQLException e) {
-            // 例外が発生した場合の処理
-            e.printStackTrace(); // 例外情報を出力
         }
         return count;
     }
