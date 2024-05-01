@@ -50,7 +50,7 @@ public class DeleteCommentDAO {
 					deleteComments.setTaskName(res.getString("task_Name"));
 					deleteComments.setUserId(res.getString("user_id"));
 					deleteComments.setUserName(res.getString("user_name"));
-					deleteComments.setTaskId(res.getInt("comment_id"));
+					deleteComments.setCommentId(res.getInt("comment_id"));
 					deleteComments.setComment(res.getString("comment"));
 					deleteComments.setUpdateDatetime(res.getTimestamp("update_datetime"));
 				}
