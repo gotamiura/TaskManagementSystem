@@ -15,18 +15,17 @@ class ViewCommentDAOTest {
 		int taskId = 53;
 		ViewCommentDAO dao = new ViewCommentDAO();
 		
-		EnterCommentsBean enterComments;
+		EnterCommentsBean enterComments = null;
 		try {
 			enterComments = dao.selectComments(taskId);
-			assertEquals(taskId,enterComments.getTaskId());
-			assertEquals("task21",enterComments.getTaskName());
-			assertEquals("shanmathi",enterComments.getUserId());
-			assertEquals("シャンマティ",enterComments.getUserName());
-			assertEquals("uuuuu",enterComments.getComment());
 		} catch (ClassNotFoundException | SQLException e) {
-			
 			e.printStackTrace();
 		}
+		assertEquals(taskId,enterComments.getTaskId());
+		assertEquals("task21",enterComments.getTaskName());
+		assertEquals("shanmathi",enterComments.getUserId());
+		assertEquals("シャンマティ",enterComments.getUserName());
+		assertEquals("uuuuu",enterComments.getComment());
 	}
 
 }

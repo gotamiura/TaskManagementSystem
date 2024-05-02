@@ -11,27 +11,29 @@ class UserDAOTest {
 	@Test
 	void test1() {
 		UserDAO userDAO = new UserDAO();
+		boolean valid = false;
 		try {
-			boolean valid = userDAO.validate("shanmathi", "shan");
-			assertTrue(valid);
-			//valid = userDAO.validate("shanmathi", "shn");
-			//assertFalse(valid);
+			valid = userDAO.validate("shanmathi", "shan");
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
+		assertTrue(valid);
+		//valid = userDAO.validate("shanmathi", "shn");
+		//assertFalse(valid);
 	}
 	
 	@Test
 	void test2() {
 		UserDAO userDAO = new UserDAO();
+		String userName = "";
 		try {
-			String userName = userDAO.userName("shanmathi", "shan");
-			assertEquals("シャンマティ",userName);			
-			//userName = userDAO.userName("shanmathi", "shn");
-			//assertNull(userName);
+			userName = userDAO.userName("shanmathi", "shan");
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
+		assertEquals("シャンマティ",userName);			
+		//userName = userDAO.userName("shanmathi", "shn");
+		//assertNull(userName);
 	}
 	
 }
