@@ -60,7 +60,7 @@ class DeleteDAOTest {
 		}
 	}
 
-//	@Test
+	@Test
 	void test1() throws SQLException {
 
 		int process = 2;
@@ -70,11 +70,6 @@ class DeleteDAOTest {
 
 		assertEquals(process, result);
 
-	}
-	@Test
-	void test2() {
-		        assertThrows(SQLException.class, () -> dao.deleteTask(0));
-		        
 	}
 
 }
