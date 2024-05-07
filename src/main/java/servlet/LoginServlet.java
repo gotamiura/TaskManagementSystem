@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import common.PasswordUtil;
 import model.dao.UserDAO;
 
 /**
@@ -33,11 +34,18 @@ public class LoginServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
 		try {
+			// ユーザが入力したパスワードをハッシュ化する
+			String hashedPassword = PasswordUtil.hashPassword(userId, password);
 			//ユーザは入力されたユーザIDとパスワードを確認する
-			if (userDao.validate(userId, password)) {
+			if (userDao.validate(userId, hashedPassword)) {
 				url = "menu.jsp";//メニュー画面
+				
+				// ユーザは入力されたユーザIDとハッシュ化されたパスワードからユーザ名を取得する
+				String userName = userDao.userName(userId, hashedPassword);
+				
 				//ユーザは入力されたユーザIDとパスワードからユーザ名を取得する
-				String userName = userDao.userName(userId, password);
+				//String userName = userDao.userName(userId, password);
+				
 				// セッションスコープへの属性の設定
 				session.setAttribute("UserName", userName);
 				session.setAttribute("UserId", userId);

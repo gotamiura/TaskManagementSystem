@@ -20,6 +20,7 @@ public class UserDAO {
 	 */
 	public boolean validate(String userId, String password) throws ClassNotFoundException, SQLException {
 		boolean validate = false;
+	
 		try(Connection con = ConnectionManager.getConnection();
 				PreparedStatement pstmt = con.prepareStatement("SELECT * FROM m_user WHERE user_id = ? && password = ?")){
 			pstmt.setString(1, userId);
@@ -41,6 +42,7 @@ public class UserDAO {
 	 */
 	public String userName(String userId, String password) throws ClassNotFoundException, SQLException {
 		String userName = null;
+	
 		try(Connection con = ConnectionManager.getConnection();
 				PreparedStatement pstmt = con.prepareStatement("SELECT * FROM m_user WHERE user_id = ? && password = ?")){
 			pstmt.setString(1, userId);
